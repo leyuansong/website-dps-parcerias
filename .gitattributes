@@ -1,0 +1,11 @@
+# Normaliza quebras de linha (evita os avisos de LF/CRLF do Git no Windows)
+* text=auto eol=lf
+
+# Binários — nunca tocar em quebra de linha
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.ico binary
+*.mp4 binary
+
+*.svg text eol=lf

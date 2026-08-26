@@ -1,0 +1,20 @@
+# Sistema operacional
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Variáveis de ambiente (caso alguma venha a ser usada)
+.env
+.env.local
