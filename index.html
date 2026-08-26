@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPS Gestão Imobiliária — Gestão de parcerias entre incorporadoras e imobiliárias</title>
+<meta name="description" content="A DPS conecta incorporadoras e imobiliárias e faz a gestão completa dessa parceria: curadoria de parceiros, treinamento de corretores e acompanhamento de resultados. Fale com um especialista.">
+<meta property="og:title" content="Parceria é venda. A DPS faz a parceria funcionar.">
+<meta property="og:description" content="Gestão de parcerias imobiliárias de ponta a ponta, para o seu estoque girar mais rápido.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { min-height: 100vh; }
+  img { max-width: 100%; display: block; }
+  button { font: inherit; cursor: pointer; }
+  a { color: inherit; }
+  ul { list-style: none; }
+  input, textarea, select { font: inherit; }
+
+  /* ---------- Design tokens ---------- */
+  :root {
+    --dps-blue-900:  #0A3A4E;
+    --dps-blue-700:  #0F506C;
+    --dps-blue-500:  #237986;
+    --dps-teal-500:  #019B99;
+    --dps-teal-700:  #00807F;
+    --dps-teal-200:  #7FD4D0;
+    --dps-ink:       #000000;
+    --dps-mist:      #B9CFD3;
+    --dps-tint:      #F1F7F9;
+    --dps-sand:      #F3F3F3;
+    --dps-gradient:  linear-gradient(120deg,#0A3A4E 0%,#0F506C 35%,#237986 65%,#019B99 100%);
+    --dps-hero-bg:      #D8E9F0;
+    --dps-hero-bg-rgb:  216,233,240;
+    --header-height: 80px;
+    --ease-elastic:  cubic-bezier(.2,.9,.28,1.28);
+    --ease-wipe:     cubic-bezier(.65,0,.15,1);
+
+    --text-primary:   #0A3A4E;
+    --text-body:      #1F2E36;
+    --text-secondary: #4A5C66;
+    --text-inverse:   #FFFFFF;
+    --surface:        #FFFFFF;
+    --border:         #D8E3E7;
+    --border-subtle:  #E6EEF1;
+
+    --success: #0E7C5A;
+    --error:   #B3261E;
+    --warning: #9A6700;
+
+    --font-display: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --radius-sm: 4px;  --radius-md: 8px;  --radius-lg: 12px;
+    --radius-xl: 20px; --radius-full: 999px;
+
+    --shadow-xs: 0 1px 2px rgba(10,58,78,.06);
+    --shadow-sm: 0 1px 3px rgba(10,58,78,.08);
+    --shadow-md: 0 8px 24px rgba(10,58,78,.10);
+    --shadow-lg: 0 16px 40px rgba(10,58,78,.14);
+    --shadow-focus: 0 0 0 3px rgba(15,80,108,.14);
+
+    --space-1:4px;  --space-2:8px;   --space-3:12px; --space-4:16px; --space-5:24px;
+    --space-6:32px; --space-7:48px;  --space-8:64px; --space-9:96px; --space-10:128px;
+
+    --container: 1200px;
+    --container-narrow: 760px;
+
+    --ease: cubic-bezier(.4,0,.2,1);
+    --duration-fast: 150ms;
+    --duration-base: 200ms;
+    --duration-slow: 400ms;
+  }
+
+  /* ---------- Base ---------- */
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-body);
+    background: var(--surface);
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; color: var(--text-primary); }
+
+  h1 { font-size: 36px; line-height: 1.1; letter-spacing: -0.02em; }
+  h2 { font-size: 28px; line-height: 1.15; letter-spacing: -0.015em; }
+  h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.01em; }
+  h4 { font-size: 18px; line-height: 1.3; }
+
+  .lead { font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.6; color: var(--text-secondary); }
+  p { max-width: 62ch; }
+  .body-small { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-display); font-weight: 600; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--dps-teal-700);
+    margin-bottom: var(--space-3);
+  }
+  .caption { font-size: 12px; line-height: 1.45; color: var(--text-secondary); }
+  strong, b { font-weight: 600; color: inherit; }
+
+  @media (min-width: 1024px) {
+    h1 { font-size: 60px; }
+    h2 { font-size: 40px; }
+    h3 { font-size: 28px; }
+    h4 { font-size: 20px; }
+    .lead { font-size: 20px; }
+    body { font-size: 17px; }
+    .eyebrow { font-size: 13px; }
+  }
+
+  /* ---------- Focus ---------- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--dps-teal-500);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ---------- Layout ---------- */
+  .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+  .container-narrow { width: 100%; max-width: var(--container-narrow); margin: 0 auto; }
+  @media (min-width: 1024px) { .container { padding: 0 40px; } }
+
+  section { padding: 64px 0; }
+  @media (min-width: 1024px) { section { padding: 96px 0; } }
+  main > section { position: relative; }
+
+  /* ---------- Ambient background: ONE fixed backdrop behind the whole page, not one per section.
+     A separate instance per section created a hard seam at every boundary (each section's blob
+     pattern started fresh and got clipped at its own edge); a single fixed layer is continuous by
+     construction — sections sit as mostly-transparent panes over the same backdrop, so nothing
+     visibly "ends" as you scroll from one into the next. */
+  .ambient-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .ambient-bg span { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .22; will-change: transform; }
+  .ambient-bg span:nth-child(1) { width: 46vw; height: 46vw; max-width: 520px; max-height: 520px; background: var(--dps-teal-500); top: -12vh; left: -10vw; animation: driftA 26s ease-in-out infinite; }
+  .ambient-bg span:nth-child(2) { width: 40vw; height: 40vw; max-width: 460px; max-height: 460px; background: var(--dps-blue-500); bottom: -14vh; right: -8vw; animation: driftB 32s ease-in-out infinite; }
+  .ambient-bg span:nth-child(3) { width: 30vw; height: 30vw; max-width: 340px; max-height: 340px; background: var(--dps-teal-200); top: 42vh; right: 22vw; opacity: .16; animation: driftC 22s ease-in-out infinite; }
+  @keyframes driftA { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(50px, 60px) scale(1.08); } }
+  @keyframes driftB { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-60px, -40px) scale(1.1); } }
+  @keyframes driftC { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px, 50px) scale(1.18); } }
+  @media (prefers-reduced-motion: reduce) { .ambient-bg span { animation: none; } }
+
+  /* ---------- Custom cursor (desktop, pointer:fine only) ---------- */
+  /* mix-blend-mode: difference inverts against whatever's underneath, so it stays
+     visible over the teal ambient blobs, the dark hero video and plain white alike —
+     a fixed color would wash out against backgrounds close to it. */
+  body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button { cursor: none; }
+  .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: difference; }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; }
+  .cursor-ring {
+    width: 32px; height: 32px; border: 1.5px solid #fff; background: transparent;
+    transition: width .25s var(--ease-elastic), height .25s var(--ease-elastic), background .25s var(--ease);
+  }
+  .cursor-ring.is-active { width: 54px; height: 54px; background: rgba(255,255,255,.3); }
+
+  /* Semi-transparent, not solid: lets the fixed ambient backdrop read through evenly,
+     so tinted and plain sections feel like the same continuous surface, not separate blocks. */
+  .section-tint { background: rgba(241,247,249,.65); }
+  .section-dark { background: var(--dps-blue-900); color: var(--text-inverse); }
+  .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--text-inverse); }
+  .section-dark p, .section-dark .lead { color: var(--dps-mist); }
+
+  .section-head { max-width: var(--container-narrow); margin-bottom: var(--space-8); }
+  .section-head h2 { margin-top: var(--space-4); }
+  .section-head .lead { margin-top: var(--space-4); }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 200;
+    background: var(--dps-blue-900); color: #fff; padding: 12px 20px;
+    border-radius: var(--radius-md);
+  }
+  .skip-link:focus { left: 20px; top: 20px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 16px 32px;
+    font-family: var(--font-body); font-weight: 600; font-size: 16px; letter-spacing: 0.01em;
+    border-radius: var(--radius-md); border: none; text-decoration: none;
+    transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--dps-blue-700); color: #fff;
+    box-shadow: 0 1px 2px rgba(10,58,78,.12);
+  }
+  .btn-primary:hover { background: var(--dps-blue-900); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-primary:active { transform: translateY(0); box-shadow: none; }
+
+  .btn-secondary {
+    background: transparent; color: var(--dps-blue-700);
+    border: 1.5px solid var(--dps-blue-700);
+  }
+  .btn-secondary:hover { background: var(--dps-tint); border-color: var(--dps-blue-900); color: var(--dps-blue-900); }
+
+  .btn-accent { background: var(--dps-teal-700); color: #fff; }
+  .btn-accent:hover { background: #016B6A; }
+
+  .btn-on-dark { background: #fff; color: var(--dps-blue-900); }
+  .btn-on-dark:hover { background: var(--dps-tint); }
+
+  .btn-text {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--dps-blue-700); font-weight: 500; font-size: 16px;
+    background: none; border: none; padding: 4px 0; min-height: 44px;
+    text-decoration: none; position: relative;
+  }
+  .btn-text .arrow { transition: transform var(--duration-fast) var(--ease); }
+  .btn-text:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .btn-text:hover .arrow { transform: translateX(4px); }
+
+  .btn-block { width: 100%; }
+
+  /* ---------- Badge ---------- */
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 6px 14px; border-radius: var(--radius-full);
+    font-family: var(--font-body); font-weight: 600; font-size: 13px;
+  }
+  .badge-neutral { background: var(--dps-tint); color: var(--dps-blue-700); }
+  .badge-accent { background: rgba(1,155,153,.12); color: var(--dps-teal-700); }
+  .badge-on-dark { border: 1px solid rgba(255,255,255,.28); color: #fff; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--surface); border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg); padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
+    position: relative; overflow: hidden;
+  }
+  @media (min-width: 1024px) { .card { padding: 32px; } }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--dps-mist); }
+  .card-bar::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--dps-gradient);
+  }
+  .card h3 { margin-bottom: var(--space-3); }
+  .card p { margin-top: var(--space-2); }
+
+  .card-dark {
+    background: var(--dps-blue-700); color: #fff; border: none; box-shadow: none;
+    border-radius: var(--radius-lg); padding: 32px;
+  }
+  .card-dark .stat-number { color: var(--dps-teal-200); }
+  .card-dark p { color: var(--dps-mist); }
+
+  .stat-number {
+    display: block; font-family: var(--font-display); font-weight: 700;
+    font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: var(--dps-blue-900);
+    margin-bottom: var(--space-2);
+  }
+  @media (min-width: 1024px) { .stat-number { font-size: 64px; } }
+
+  .card-testimonial {
+    background: var(--dps-tint); border: none; border-radius: var(--radius-lg);
+    padding: 32px; box-shadow: none; position: relative;
+  }
+  .card-testimonial .quote-mark {
+    font-family: var(--font-display); font-size: 48px; color: var(--dps-teal-500);
+    opacity: .2; line-height: 1; position: absolute; top: 20px; right: 24px;
+  }
+  .testimonial-person { display: flex; align-items: center; gap: 12px; margin-top: var(--space-5); }
+  .testimonial-avatar { width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; }
+  .testimonial-name { font-family: var(--font-body); font-weight: 600; color: var(--dps-blue-900); font-size: 15px; }
+  .testimonial-role { font-size: 14px; color: var(--text-secondary); }
+
+  /* ---------- Forms ---------- */
+  .form-group { margin-bottom: 20px; }
+  .form-label {
+    display: block; font-size: 14px; font-weight: 500; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .form-label .required { color: var(--dps-teal-700); margin-left: 2px; }
+  .form-control {
+    width: 100%; min-height: 52px; padding: 14px 16px;
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius-md);
+    color: var(--text-body); font-size: 16px; font-family: var(--font-body);
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+  }
+  .form-control::placeholder { color: #7A8C94; }
+  .form-control:hover { border-color: var(--dps-mist); }
+  .form-control:focus { border-color: var(--dps-blue-700); box-shadow: var(--shadow-focus); outline: none; }
+  textarea.form-control { min-height: 120px; resize: vertical; }
+
+  .form-consent { display: flex; align-items: flex-start; gap: 10px; margin: 24px 0; }
+  .form-consent input[type="checkbox"] {
+    width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid var(--border);
+    flex-shrink: 0; margin-top: 2px; accent-color: var(--dps-blue-700);
+  }
+  .form-consent label { font-size: 13px; color: var(--text-secondary); }
+
+  .form-note { margin-top: 16px; font-size: 13px; color: var(--text-secondary); }
+  .form-success {
+    display: none; background: var(--dps-tint); border: 1.5px solid var(--success);
+    border-radius: var(--radius-md); padding: 20px; color: var(--text-body); font-size: 15px;
+  }
+  .form-success.is-visible { display: block; }
+
+  /* ---------- Header ---------- */
+  .top-accent { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: var(--dps-gradient); z-index: 101; }
+  .scroll-progress { position: fixed; top: 4px; left: 0; height: 2px; width: 0%; background: var(--dps-teal-500); z-index: 101; pointer-events: none; }
+
+  body { padding-top: var(--header-height); }
+
+  header.site-header {
+    position: fixed; top: 4px; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,.96);
+    backdrop-filter: blur(6px); border-bottom: 1px solid transparent;
+    transition: background var(--duration-slow) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
+  }
+  header.site-header.is-scrolled { box-shadow: var(--shadow-xs); border-color: var(--border-subtle); }
+
+  /* Transparent overlay while the hero video is in view.
+     The video has both light and dark regions, so white nav text alone isn't reliably
+     legible — a soft dark scrim sits behind the nav content to guarantee contrast either way. */
+  header.site-header.is-transparent { background: transparent; backdrop-filter: none; box-shadow: none; border-color: transparent; }
+  header.site-header.is-transparent::before {
+    content: ""; position: absolute; inset: 0 0 -28px 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(8,20,24,.42) 0%, rgba(8,20,24,.20) 65%, rgba(8,20,24,0) 100%);
+  }
+  header.site-header.is-transparent .logo-word { -webkit-text-fill-color: #fff; background: none; color: #fff; }
+  header.site-header.is-transparent .logo-word,
+  header.site-header.is-transparent .logo-sub,
+  header.site-header.is-transparent .nav-menu a { text-shadow: 0 1px 6px rgba(0,0,0,.45); }
+  header.site-header.is-transparent .logo-sub { color: rgba(255,255,255,.85); }
+  header.site-header.is-transparent .nav-menu a { color: #fff; }
+  header.site-header.is-transparent .nav-menu a::after { background: #fff; }
+  header.site-header.is-transparent .nav-cta.btn-primary { background: rgba(255,255,255,.16); color: #fff; box-shadow: none; border: 1.5px solid rgba(255,255,255,.6); }
+  header.site-header.is-transparent .nav-cta.btn-primary:hover { background: rgba(255,255,255,.28); }
+  header.site-header.is-transparent .nav-toggle { color: #fff; }
+  header.site-header.is-transparent .nav-toggle:hover { background: rgba(255,255,255,.16); }
+  .logo-word, .nav-menu a, .nav-cta.btn-primary, .nav-toggle { transition: color var(--duration-slow) var(--ease), background var(--duration-slow) var(--ease), border-color var(--duration-slow) var(--ease), text-shadow var(--duration-slow) var(--ease); }
+
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1; }
+  .logo-word {
+    font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em;
+    background: var(--dps-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .logo-sub {
+    font-family: var(--font-body); font-weight: 400; font-size: 9px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-secondary); margin-top: 3px;
+  }
+
+  .nav-menu { display: none; align-items: center; gap: var(--space-6); }
+  .nav-menu a {
+    font-size: 15px; font-weight: 500; color: var(--text-body); text-decoration: none;
+    padding: 10px 2px; position: relative;
+  }
+  .nav-menu a:hover { color: var(--dps-blue-700); }
+  .nav-menu a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px;
+    background: var(--dps-teal-700); transform: scaleX(0); transition: transform var(--duration-fast) var(--ease);
+  }
+  .nav-menu a:hover::after { transform: scaleX(1); }
+
+  .nav-cta { display: none; }
+  .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: none; border: none; border-radius: var(--radius-md);
+  }
+  .nav-toggle:hover { background: var(--dps-tint); }
+  .nav-toggle svg { width: 24px; height: 24px; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+  .mobile-menu {
+    display: none; flex-direction: column; gap: var(--space-1);
+    padding: var(--space-4) 0 var(--space-6); border-top: 1px solid var(--border-subtle);
+  }
+  .mobile-menu.is-open { display: flex; }
+  .mobile-menu a {
+    padding: 14px 4px; font-size: 16px; font-weight: 500; color: var(--text-body); text-decoration: none;
+    border-radius: var(--radius-md); min-height: 44px; display: flex; align-items: center;
+  }
+  .mobile-menu a:hover { background: var(--dps-tint); color: var(--dps-blue-700); }
+  .mobile-menu .btn { margin-top: var(--space-3); }
+
+  @media (min-width: 1024px) {
+    .nav-menu { display: flex; }
+    .nav-cta { display: inline-flex; }
+    .nav-toggle { display: none; }
+    .mobile-menu { display: none !important; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: 100svh;
+    margin-top: calc(-1 * var(--header-height));
+    display: flex; align-items: flex-end;
+    /* Fades into the tone the next section settles at, instead of a flat color that
+       cuts hard against it — that flat block against a blob-tinted section is what read
+       as a visible band at the seam. */
+    background: linear-gradient(180deg, var(--dps-hero-bg) 0%, var(--dps-hero-bg) 93%, #F6FAFB 100%);
+    padding: calc(var(--header-height) + 48px) 0 64px;
+  }
+  .hero-bottom-glow {
+    position: absolute; left: 0; right: 0; bottom: -10%; height: 45%; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .hero-bottom-glow span {
+    position: absolute; border-radius: 50%; filter: blur(70px); opacity: .28; will-change: transform;
+  }
+  .hero-bottom-glow span:nth-child(1) { width: 42vw; height: 42vw; max-width: 480px; max-height: 480px; background: var(--dps-teal-500); left: -8vw; bottom: -18vw; animation: driftA 26s ease-in-out infinite; }
+  .hero-bottom-glow span:nth-child(2) { width: 32vw; height: 32vw; max-width: 380px; max-height: 380px; background: var(--dps-blue-500); right: 6vw; bottom: -14vw; opacity: .2; animation: driftB 30s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .hero-bottom-glow span { animation: none; } }
+  @media (min-width: 1024px) { .hero { padding: calc(var(--header-height) + 64px) 0 96px; } }
+
+  /* Straddles the hero/next-section boundary — sits in the NEXT section (not the hero,
+     which clips its own overflow) with a negative top so it bleeds up over the seam.
+     Heavily blurred on purpose: a crisp vector edge reads as a line no matter what shape
+     it's cut into, wavy or not. Blurring it into a soft cloud of color, tuned to match the
+     surrounding tones almost exactly, is what actually makes the seam disappear. A slow
+     drift keeps it from feeling static without ever registering as a "shape". */
+  .hero-wave { position: absolute; top: -55px; left: 0; right: 0; height: 100px; overflow: hidden; pointer-events: none; z-index: 1; }
+  .hero-wave svg { position: absolute; left: -10%; top: -20%; width: 220%; height: 140%; filter: blur(26px); }
+  .hero-wave-back { animation: waveDrift 34s linear infinite; opacity: .35; }
+  .hero-wave-front { animation: waveDriftReverse 22s linear infinite; }
+  @keyframes waveDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes waveDriftReverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  @media (prefers-reduced-motion: reduce) { .hero-wave-back, .hero-wave-front { animation: none; } }
+  @media (max-width: 700px) {
+    .hero { display: block; padding: 0 0 40px; min-height: 0; }
+  }
+
+  /* Desktop: video fills the whole hero, absolutely positioned per design spec.
+     Mobile: the video becomes a contained media block that flows above the text,
+     cropped (object-fit: cover) and faded into the background so nothing feels cut off. */
+  .hero-media { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  @media (max-width: 700px) {
+    .hero-media { position: relative; height: 52vh; min-height: 280px; overflow: hidden; }
+  }
+
+  .hero-video-bg {
+    position: absolute; top: 0; right: -20%; width: 99%; height: auto;
+    pointer-events: none; z-index: 0; object-fit: contain;
+    /* Keep the globe's natural white/grey finish untouched — no color filter. Its contrast
+       comes from the footage's own dark-to-light gradient, not from tinting or the page bg. */
+    /* The video is a rectangle with a hard edge — this was the real "barrier": no matter how
+       well the surrounding colors matched, the footage's own crisp bottom border always read
+       as a seam. Fading it out with a mask lets it dissolve into the section instead of stopping dead. */
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 96%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 96%);
+  }
+  @media (max-width: 700px) {
+    .hero-video-bg { top: 0; left: -12%; right: auto; width: 119%; height: 100%; object-fit: cover; }
+  }
+
+  .hero-media-fade { display: none; }
+  @media (max-width: 700px) {
+    .hero-media-fade {
+      display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; z-index: 1;
+      background: linear-gradient(180deg, rgba(var(--dps-hero-bg-rgb),0) 0%, var(--dps-hero-bg) 88%);
+    }
+  }
+
+  /* Fixed px stops, not %: the text column caps at 720px, so this covers exactly that
+     column on any screen width and clears fully well before the globe's usual position —
+     a scrim that lingers translucent over the globe is what was dulling it. */
+  .hero-scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, var(--dps-hero-bg) 0px, var(--dps-hero-bg) 780px, rgba(var(--dps-hero-bg-rgb),.4) 880px, rgba(var(--dps-hero-bg-rgb),0) 1000px);
+  }
+  @media (max-width: 700px) { .hero-scrim { display: none; } }
+
+  /* Sits in FRONT of the video (unlike the video's own internal mask, which fades relative
+     to the VIDEO's height) so the bottom of the hero always ends in a clean gradient no
+     matter how tall the video renders on a given screen — on short/wide viewports the video
+     can be taller than the hero box itself, and hero's own overflow:hidden was chopping it
+     off before its internal fade ever kicked in. This guarantees the fade regardless. */
+  .hero-bottom-fade {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 130px; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(var(--dps-hero-bg-rgb),0) 0%, var(--dps-hero-bg) 45%, #F6FAFB 100%);
+  }
+
+  .hero-cursor-glow {
+    position: absolute; width: 460px; height: 460px; left: 0; top: 0;
+    border-radius: 50%; z-index: 1; pointer-events: none; opacity: 0;
+    background: radial-gradient(circle, rgba(1,155,153,.20), rgba(1,155,153,0) 70%);
+    transform: translate(-50%, -50%);
+    transition: opacity .4s var(--ease);
+  }
+  @media (max-width: 1023px) { .hero-cursor-glow { display: none; } }
+
+  .hero-inner { position: relative; z-index: 2; max-width: 720px; }
+  @media (max-width: 700px) { .hero-inner { margin-top: 24px; } }
+
+  .hero-heading {
+    font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+    color: var(--text-primary); line-height: 0.98; letter-spacing: 0.01em;
+    font-size: clamp(32px, 6.2vw, 66px);
+    margin-bottom: var(--space-6);
+  }
+  .stair-line { display: block; }
+  .stair-line.indent { margin-left: min(120px, 16vw); }
+  .stair-line.accent { color: var(--dps-teal-500); }
+  .word-wrap { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; }
+  .word { display: inline-block; opacity: 0; transform: translateY(100%); transition: opacity .6s var(--ease), transform .7s var(--ease-elastic); }
+  .hero-heading.is-visible .word, .split-title.is-visible .word { opacity: 1; transform: translateY(0); }
+
+  .hero .lead { max-width: 56ch; margin-bottom: var(--space-4); }
+  .hero-credibility { color: var(--text-secondary); font-size: 15px; margin-bottom: var(--space-6); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .hero-secondary-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+
+  /* ---------- Reveal helpers: word-split titles & mask wipe ---------- */
+  .split-title .word { transform: translateY(60%); }
+
+  .mask-reveal { position: relative; overflow: hidden; }
+  .mask-reveal::after {
+    content: ""; position: absolute; inset: 0; z-index: 2;
+    background: var(--dps-blue-700);
+    transform-origin: right; transform: scaleX(1);
+    transition: transform 1s var(--ease-wipe);
+  }
+  .mask-reveal.is-visible::after { transform: scaleX(0); }
+
+  /* ---------- Magnetic buttons ---------- */
+  .btn-primary, .btn-accent { transition: background var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform .35s var(--ease-elastic); }
+
+  /* ---------- Prova social ---------- */
+  .logos-row {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+  @media (min-width: 640px) { .logos-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .logos-row { grid-template-columns: repeat(6, 1fr); } }
+  .logo-slot {
+    display: flex; align-items: center; justify-content: center;
+    height: 72px; background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+    color: var(--text-secondary); font-size: 13px; font-weight: 500; text-align: center; padding: 8px;
+  }
+  .stats-row { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+  @media (min-width: 768px) { .stats-row { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ---------- Problema ---------- */
+  .problem-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
+  @media (min-width: 1024px) { .problem-grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-9); } }
+  .problem-text p { margin-bottom: var(--space-5); }
+  .pain-list { display: flex; flex-direction: column; gap: var(--space-4); }
+  .pain-item {
+    display: flex; gap: var(--space-3); align-items: flex-start;
+    background: var(--dps-tint); border-radius: var(--radius-md); padding: var(--space-4);
+  }
+  .pain-item svg { flex-shrink: 0; width: 22px; height: 22px; color: var(--dps-teal-700); margin-top: 2px; }
+  .pain-item span { color: var(--text-body); font-size: 15px; }
+  .turn-line {
+    margin-top: var(--space-8); padding: var(--space-6);
+    border-left: 3px solid var(--dps-teal-500); background: var(--dps-tint);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+  .turn-line p { font-family: var(--font-display); font-weight: 600; color: var(--text-primary); font-size: 20px; max-width: none; }
+
+  /* ---------- Solução / passos ---------- */
+  .step-eyebrow-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+  .step-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%; background: var(--dps-blue-700); color: #fff;
+    font-family: var(--font-display); font-weight: 700; font-size: 14px; flex-shrink: 0;
+    position: relative; z-index: 1; transition: background var(--duration-slow) var(--ease), transform var(--duration-base) var(--ease-elastic);
+  }
+  .step-label { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dps-teal-700); }
+  .step-block { margin-bottom: var(--space-9); }
+  .step-block:last-child { margin-bottom: 0; }
+  .step-block-head { max-width: var(--container-narrow); margin-bottom: var(--space-6); }
+  .step-block-head h3 { margin-top: 4px; }
+  .step-block-head .lead { margin-top: var(--space-3); }
+
+  .cards-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .cards-grid-4 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .cards-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .cards-grid-4 { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+
+  .solution-card-cta { margin-top: var(--space-5); }
+
+  .combine-block {
+    background: var(--dps-blue-700); border-radius: var(--radius-lg); padding: 48px 32px;
+    color: #fff; text-align: center; max-width: var(--container-narrow); margin: 0 auto;
+  }
+  @media (min-width: 1024px) { .combine-block { padding: 64px; } }
+  .combine-block p { color: var(--dps-mist); margin: 0 auto var(--space-6); font-size: 18px; }
+
+  /* ---------- Como começar ---------- */
+  .start-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-9); }
+  @media (min-width: 1024px) { .start-layout { grid-template-columns: 0.9fr 1.1fr; } }
+  .start-steps { display: flex; flex-direction: column; gap: var(--space-6); position: relative; }
+  .start-steps-line, .start-steps-progress { position: absolute; left: 17px; top: 18px; bottom: 18px; width: 2px; z-index: 0; }
+  .start-steps-line { background: var(--border); }
+  .start-steps-progress { background: var(--dps-teal-500); height: 0%; bottom: auto; transition: height .15s linear; }
+  .start-step { display: flex; gap: var(--space-4); }
+  .start-step.is-active .step-number { background: var(--dps-teal-500); transform: scale(1.08); }
+  .start-step h3 { margin-bottom: var(--space-2); }
+  .start-form-wrap {
+    background: var(--dps-tint); border-radius: var(--radius-lg); padding: 24px;
+  }
+  @media (min-width: 1024px) { .start-form-wrap { padding: 40px; } }
+  .form-row-2 { display: grid; grid-template-columns: 1fr; gap: 0 var(--space-4); }
+  @media (min-width: 640px) { .form-row-2 { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- Para imobiliárias ---------- */
+  .realtor-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-8); align-items: start; }
+  @media (min-width: 1024px) { .realtor-layout { grid-template-columns: 1fr 1fr; } }
+  .realtor-bullets { display: flex; flex-direction: column; gap: var(--space-4); margin: var(--space-6) 0; }
+  .realtor-bullet { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .realtor-bullet svg { flex-shrink: 0; width: 20px; height: 20px; color: var(--dps-teal-700); margin-top: 3px; }
+  .realtor-visual {
+    background: var(--dps-blue-900); border-radius: var(--radius-xl); min-height: 280px;
+    position: relative; overflow: hidden; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; gap: var(--space-4); padding: 40px;
+  }
+  .realtor-visual .tri { position: absolute; opacity: .5; pointer-events: none; }
+  .realtor-visual p { color: var(--dps-mist); font-size: 14px; position: relative; z-index: 1; }
+  .realtor-seal {
+    width: 140px; height: 140px; border-radius: var(--radius-full); position: relative; z-index: 1;
+    box-shadow: var(--shadow-lg); background: #fff;
+  }
+
+  /* ---------- Resultados ---------- */
+  .case-card { display: flex; flex-direction: column; }
+  .case-card .badge { margin-bottom: var(--space-5); align-self: flex-start; }
+  .case-stat { display: flex; gap: var(--space-6); margin-bottom: var(--space-4); flex-wrap: wrap; }
+  .case-stat div .stat-number { font-size: 32px; margin-bottom: 0; }
+  .case-stat div span.stat-label { font-size: 13px; color: var(--text-secondary); }
+
+  /* ---------- Segmentos (marquee) ---------- */
+  .segments-band { background: var(--dps-blue-900); padding: 56px 0; overflow: hidden; }
+  .segments-band .eyebrow { color: var(--dps-teal-200); }
+  .segments-band h2 { color: #fff; margin-bottom: var(--space-8); }
+  .marquee { overflow: hidden; position: relative; padding: var(--space-5) 0; border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+  .marquee-track {
+    display: flex; width: max-content; gap: 48px; animation: scroll-marquee 28s linear infinite;
+  }
+  .marquee-track span { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--dps-mist); white-space: nowrap; }
+  @keyframes scroll-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .segments-note { margin-top: var(--space-6); color: var(--dps-mist); font-size: 15px; }
+
+  /* ---------- Sobre / Pilares ---------- */
+  .about-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-9); }
+  @media (min-width: 1024px) { .about-layout { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .about-photo { border-radius: var(--radius-xl); width: 100%; height: auto; }
+  .about-video-wrap {
+    position: relative; border-radius: var(--radius-xl); overflow: hidden;
+    aspect-ratio: 4 / 3; box-shadow: var(--shadow-lg);
+  }
+  .about-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-video-tint { position: absolute; inset: 0; background: var(--dps-teal-500); mix-blend-mode: hue; pointer-events: none; z-index: 1; }
+  .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-7); }
+
+  .pillars-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 768px) { .pillars-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .pillar-icon {
+    width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(1,155,153,.12);
+    display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4);
+  }
+  .pillar-icon svg { width: 24px; height: 24px; color: var(--dps-teal-700); }
+
+  /* ---------- Depoimentos ---------- */
+  /* Cards "deal in" like a stack being fanned out, staggered per card */
+  .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .testimonials-grid .card-testimonial {
+    transform: translateY(50px) rotate(-3deg) scale(.92);
+    transition: opacity .6s var(--ease), transform .7s var(--ease-elastic);
+  }
+  .testimonials-grid .card-testimonial:nth-child(2n) { transform: translateY(50px) rotate(3deg) scale(.92); }
+  .testimonials-grid .card-testimonial.is-visible { transform: translateY(0) rotate(0) scale(1); }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: var(--container-narrow); }
+  .faq-item { border-bottom: 1px solid var(--border-subtle); }
+  .faq-item:first-child { border-top: 1px solid var(--border-subtle); }
+  .faq-question {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    background: none; border: none; text-align: left; padding: 24px 0; min-height: 44px;
+  }
+  .faq-question h3 { font-size: 18px; }
+  .faq-question .icon-plus {
+    flex-shrink: 0; width: 20px; height: 20px; position: relative; color: var(--dps-teal-700);
+    transition: transform var(--duration-base) var(--ease);
+  }
+  .faq-question .icon-plus::before, .faq-question .icon-plus::after {
+    content: ""; position: absolute; background: currentColor; border-radius: 2px;
+  }
+  .faq-question .icon-plus::before { top: 9px; left: 0; width: 20px; height: 2px; }
+  .faq-question .icon-plus::after { top: 0; left: 9px; width: 2px; height: 20px; }
+  .faq-question[aria-expanded="true"] .icon-plus { transform: rotate(45deg); }
+  .faq-answer {
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-base) var(--ease);
+  }
+  .faq-answer.is-open { grid-template-rows: 1fr; }
+  .faq-answer-inner { overflow: hidden; }
+  .faq-answer p { padding-bottom: 24px; max-width: 62ch; }
+
+  /* ---------- CTA final ---------- */
+  .cta-final { background: var(--dps-gradient); color: #fff; text-align: center; }
+  .particles-canvas { position: absolute; inset: 0; z-index: 0; }
+  .cta-final h2 { color: #fff; max-width: var(--container-narrow); margin: 0 auto var(--space-5); }
+  .cta-final .lead { color: rgba(255,255,255,.88); max-width: var(--container-narrow); margin: 0 auto var(--space-7); }
+  .cta-final-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .cta-final .risk-line { color: rgba(255,255,255,.75); font-size: 14px; max-width: 50ch; margin: 0 auto; }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer { background: var(--dps-blue-900); color: var(--dps-mist); padding: var(--space-9) 0 var(--space-6); }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-7); margin-bottom: var(--space-8); }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .footer-grid { grid-template-columns: 1.3fr 1fr 1fr 1fr; } }
+  .footer-brand .logo { flex-direction: row; align-items: center; gap: 12px; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .footer-brand .logo-word { -webkit-text-fill-color: #fff; background: none; color: #fff; }
+  .footer-brand .logo-sub { color: var(--dps-mist); }
+  .footer-seal { width: 56px; height: 56px; border-radius: var(--radius-full); flex-shrink: 0; }
+  .footer-brand p { color: var(--dps-mist); font-size: 14px; margin-top: var(--space-4); max-width: 32ch; }
+  .footer-col h4 { color: #fff; font-size: 15px; margin-bottom: var(--space-4); }
+  .footer-col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+  .footer-col a { color: var(--dps-mist); text-decoration: none; font-size: 14px; min-height: 32px; display: inline-flex; align-items: center; }
+  .footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .footer-social { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .footer-social a {
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28);
+    display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none;
+  }
+  .footer-social a:hover { background: rgba(255,255,255,.12); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.15); padding-top: var(--space-6);
+    display: flex; flex-direction: column; gap: var(--space-4);
+  }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
+  .footer-legal { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); font-size: 13px; }
+  .footer-legal a { color: var(--dps-mist); text-decoration: none; }
+  .footer-legal a:hover { color: #fff; text-decoration: underline; }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--duration-slow) var(--ease), transform var(--duration-slow) var(--ease); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+    .marquee-track { animation: none; }
+    .word { opacity: 1 !important; transform: none !important; }
+    .mask-reveal::after { transform: scaleX(0) !important; }
+    .hero-cursor-glow { display: none !important; }
+    .hero-video-bg, .about-video { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+<div class="top-accent" aria-hidden="true"></div>
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+<div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#top" class="logo" aria-label="DPS Gestão Imobiliária, página inicial">
+        <span class="logo-word">DPS</span>
+        <span class="logo-sub">Gestão Imobiliária</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="#solucoes">Soluções</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#para-imobiliarias">Para imobiliárias</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#sobre">Sobre a DPS</a>
+      </nav>
+
+      <a href="#comece-agora" class="btn btn-primary nav-cta">Falar com a DPS</a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu de navegação">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Navegação móvel">
+      <a href="#solucoes">Soluções</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#para-imobiliarias">Para imobiliárias</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#sobre">Sobre a DPS</a>
+      <a href="#comece-agora" class="btn btn-primary btn-block">Falar com a DPS</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Hero -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video-bg" autoplay muted loop playsinline preload="auto">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260823_050407_500d0339-ab28-41c1-9688-132a74a3b5aa.mp4" type="video/mp4">
+      </video>
+      <div class="hero-media-fade"></div>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-bottom-fade" aria-hidden="true"></div>
+    <div class="hero-cursor-glow" aria-hidden="true"></div>
+    <div class="hero-bottom-glow" aria-hidden="true"><span></span><span></span></div>
+    <div class="container">
+      <div class="hero-inner">
+        <p class="eyebrow">DPS é parceria</p>
+        <h1 id="hero-title" class="hero-heading">
+          <span class="stair-line"><span class="word-wrap"><span class="word">Gestão</span></span></span>
+          <span class="stair-line"><span class="word-wrap"><span class="word">de</span></span> <span class="word-wrap"><span class="word">parceria</span></span></span>
+          <span class="stair-line indent"><span class="word-wrap"><span class="word">que</span></span></span>
+          <span class="stair-line indent"><span class="word-wrap"><span class="word">transforma</span></span></span>
+          <span class="stair-line indent accent"><span class="word-wrap"><span class="word">venda</span></span></span>
+        </h1>
+        <p class="lead">Conectamos incorporadoras e imobiliárias e cuidamos dessa relação de ponta a ponta — do primeiro contato ao contrato assinado.</p>
+        <p class="hero-credibility">Desde [ano] girando estoque de incorporadoras em [cidade/região].</p>
+        <div class="hero-actions">
+          <a href="#comece-agora" class="btn btn-primary">Quero uma proposta de parceria</a>
+          <a href="#como-funciona" class="btn btn-secondary">Ver como a gestão funciona</a>
+        </div>
+        <a href="#para-imobiliarias" class="hero-secondary-link btn-text">
+          Sou imobiliária ou corretor <span class="arrow" aria-hidden="true">→</span> quero entrar na rede DPS
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prova social -->
+  <section class="section-tint" aria-labelledby="social-proof-title">
+    <div class="hero-wave" aria-hidden="true">
+      <svg class="hero-wave-back" viewBox="0 0 2880 140" preserveAspectRatio="none">
+        <path d="M0,60 C220,110 440,10 720,60 C1000,110 1220,10 1440,60 C1660,110 1880,10 2160,60 C2440,110 2660,10 2880,60 L2880,140 L0,140 Z" fill="var(--dps-teal-200)" opacity=".4"></path>
+      </svg>
+      <svg class="hero-wave-front" viewBox="0 0 2880 120" preserveAspectRatio="none">
+        <path d="M0,40 C180,0 540,80 720,40 C900,0 1260,80 1440,40 C1620,0 1980,80 2160,40 C2340,0 2700,80 2880,40 L2880,120 L0,120 Z" fill="#F6FAFB"></path>
+      </svg>
+    </div>
+    <div class="container">
+      <h2 id="social-proof-title" style="max-width:var(--container-narrow)">Incorporadoras e imobiliárias que trabalham com a DPS</h2>
+
+      <div class="logos-row" role="list" aria-label="Logos de parceiros">
+        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
+        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
+        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
+        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
+        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
+        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
+      </div>
+
+      <div class="stats-row">
+        <div class="card reveal">
+          <span class="stat-number">[+X]</span>
+          <p class="body-small">incorporadoras parceiras</p>
+        </div>
+        <div class="card reveal">
+          <span class="stat-number">[+X]</span>
+          <p class="body-small">imobiliárias e corretores na rede</p>
+        </div>
+        <div class="card reveal">
+          <span class="stat-number">[R$ X]</span>
+          <p class="body-small">em VGV vendido pela rede</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problema -->
+  <section aria-labelledby="problem-title">
+    <div class="container">
+      <div class="problem-grid">
+        <div class="problem-text reveal">
+          <h2 id="problem-title">Parceria imobiliária não falha por falta de parceiro. Falha por falta de gestão.</h2>
+          <div style="margin-top: var(--space-6)">
+            <p>Você abre o empreendimento para dez imobiliárias. Três vendem. Duas somem depois do primeiro mês. As outras cinco atendem o seu cliente de um jeito que você nunca aprovaria — e você só descobre quando a reclamação chega.</p>
+            <p>Enquanto isso, alguém do seu time gasta a semana repassando tabela por WhatsApp, resolvendo conflito de comissão e tentando lembrar quem cadastrou qual cliente.</p>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <ul class="pain-list">
+            <li class="pain-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Parceiro entra, some e ninguém acompanha</span>
+            </li>
+            <li class="pain-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Corretor vende o seu produto sem conhecer o seu produto</span>
+            </li>
+            <li class="pain-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Conflito de lead e disputa de comissão travando o fechamento</span>
+            </li>
+            <li class="pain-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Nenhuma visibilidade de quem está performando e quem não está</span>
+            </li>
+            <li class="pain-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Cada parceria funciona de um jeito, e nenhuma escala</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="turn-line reveal">
+        <p>A parceria é uma boa estratégia. O que quase ninguém faz é tratá-la como uma operação.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solução em 3 passos -->
+  <section class="section-tint" id="como-funciona" aria-labelledby="solution-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Como funciona</p>
+        <h2 id="solution-title">Transforme suas parcerias em uma operação de vendas em 3 passos</h2>
+      </div>
+
+      <!-- Passo 01 -->
+      <div class="step-block" id="solucoes">
+        <div class="step-block-head reveal">
+          <div class="step-eyebrow-row">
+            <span class="step-number">01</span>
+            <span class="step-label">O que fazemos</span>
+          </div>
+          <h3>Conheça as soluções da DPS</h3>
+          <p class="lead">Tudo o que é preciso para uma parceria sair do improviso e virar previsibilidade de venda.</p>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card card-bar reveal">
+            <h3>Gestão de parcerias</h3>
+            <p>Somos o ponto único de contato entre a sua incorporadora e cada imobiliária parceira. Regras claras, fluxo definido, acompanhamento semanal. Você deixa de administrar dez relações soltas e passa a administrar uma.</p>
+            <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="card card-bar reveal">
+            <h3>Captação e curadoria de parceiros</h3>
+            <p>Não trazemos qualquer imobiliária. Selecionamos parceiros com perfil, região e carteira compatíveis com o seu produto — e recusamos os que não são.</p>
+            <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="card card-bar reveal">
+            <h3>Treinamento contínuo da equipe</h3>
+            <p>Corretor que conhece o empreendimento vende o empreendimento. Treinamos a rede em produto, argumentação e atendimento antes do lançamento e ao longo de toda a venda.</p>
+            <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="card card-bar reveal">
+            <h3>Inteligência de dados e performance</h3>
+            <p>Quem vendeu, quanto vendeu, em quanto tempo e a que custo. Você acompanha o desempenho de cada parceiro em vez de descobrir no fim do mês.</p>
+            <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="card card-bar reveal">
+            <h3>Apoio a lançamentos</h3>
+            <p>Convenção, plantão, material, escala de atendimento. Estruturamos a força de vendas para o dia em que ela mais importa.</p>
+            <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="card card-bar reveal">
+            <h3>Relacionamento e experiência do cliente</h3>
+            <p>O comprador não sabe quem é a imobiliária parceira — ele só vê a sua marca. Padronizamos o atendimento para que a experiência seja a mesma em qualquer ponta.</p>
+            <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 02 -->
+      <div class="step-block">
+        <div class="step-block-head reveal">
+          <div class="step-eyebrow-row">
+            <span class="step-number">02</span>
+            <span class="step-label">Como fazemos</span>
+          </div>
+          <h3>Escolha o modelo de atuação</h3>
+          <p class="lead">Cada empreendimento está em um momento diferente. O formato acompanha.</p>
+        </div>
+
+        <div class="cards-grid-4">
+          <div class="card reveal">
+            <h4>Gestão contínua</h4>
+            <p class="body-small" style="margin-top:12px">A DPS assume a operação de parcerias da sua incorporadora de forma permanente: capta, treina, acompanha e reporta. Para quem tem lançamentos recorrentes e não quer montar essa estrutura internamente.</p>
+          </div>
+          <div class="card reveal">
+            <h4>Força-tarefa de lançamento</h4>
+            <p class="body-small" style="margin-top:12px">Montagem e gestão da rede de vendas para um lançamento específico, do pré-lançamento à estabilização das vendas. Escopo e prazo definidos.</p>
+          </div>
+          <div class="card reveal">
+            <h4>Escoamento de estoque</h4>
+            <p class="body-small" style="margin-top:12px">Unidades remanescentes que pararam de girar. Reativamos a rede certa, reposicionamos o argumento e voltamos a vender o que estava parado.</p>
+          </div>
+          <div class="card reveal">
+            <h4>Expansão para novas praças</h4>
+            <p class="body-small" style="margin-top:12px">Sua incorporadora vai lançar em uma região onde ainda não tem relacionamento. Construímos a rede de parceiros local antes de a obra sair do papel.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 03 -->
+      <div class="step-block">
+        <div class="step-eyebrow-row reveal" style="justify-content:center; margin-bottom: var(--space-5)">
+          <span class="step-number">03</span>
+          <span class="step-label">Combine do jeito que o seu negócio precisa</span>
+        </div>
+        <div class="combine-block reveal">
+          <p>São <strong>[6]</strong> soluções aplicadas em <strong>[4]</strong> modelos de atuação. Na prática, a DPS monta o arranjo que faz sentido para o seu portfólio, a sua região e o seu momento — e ajusta quando o momento muda.</p>
+          <a href="#comece-agora" class="btn btn-on-dark">Montar minha operação de parcerias</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como começar -->
+  <section id="comece-agora" aria-labelledby="start-title">
+    <div class="container">
+      <div class="start-layout">
+        <div class="reveal">
+          <h2 id="start-title">Dar o próximo passo leva menos de um minuto</h2>
+          <div class="start-steps" style="margin-top: var(--space-7)">
+            <div class="start-steps-line" aria-hidden="true"></div>
+            <div class="start-steps-progress" aria-hidden="true"></div>
+            <div class="start-step">
+              <span class="step-number">1</span>
+              <div>
+                <h3>Preencha o formulário</h3>
+                <p class="body-small">Envie seus dados de contato e conte em uma frase o que você precisa vender. Seus dados ficam com a gente.</p>
+              </div>
+            </div>
+            <div class="start-step">
+              <span class="step-number">2</span>
+              <div>
+                <h3>Receba uma ligação</h3>
+                <p class="body-small">Em até [X horas], um especialista da DPS entra em contato para agendar o diagnóstico da sua operação de parcerias.</p>
+              </div>
+            </div>
+            <div class="start-step">
+              <span class="step-number">3</span>
+              <div>
+                <h3>Receba seu plano de parceria</h3>
+                <p class="body-small">Depois do diagnóstico, você recebe uma proposta com escopo, modelo de remuneração e metas. Sem compromisso.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="start-form-wrap reveal">
+          <form id="lead-form" novalidate>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="f-nome">Nome completo<span class="required">*</span></label>
+                <input class="form-control" type="text" id="f-nome" name="nome" autocomplete="name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-empresa">Incorporadora / empresa<span class="required">*</span></label>
+                <input class="form-control" type="text" id="f-empresa" name="empresa" autocomplete="organization" required>
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="f-email">E-mail<span class="required">*</span></label>
+                <input class="form-control" type="email" id="f-email" name="email" autocomplete="email" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-telefone">Telefone / WhatsApp<span class="required">*</span></label>
+                <input class="form-control" type="tel" id="f-telefone" name="telefone" autocomplete="tel" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-mensagem">O que você precisa vender?</label>
+              <textarea class="form-control" id="f-mensagem" name="mensagem" placeholder="Conte em uma frase o que você precisa vender"></textarea>
+            </div>
+            <div class="form-consent">
+              <input type="checkbox" id="f-consent" name="consent" required>
+              <label for="f-consent">Autorizo o uso dos meus dados para contato da DPS Gestão Imobiliária, conforme a LGPD.<span class="required">*</span></label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Começar agora</button>
+            <p class="form-note" id="form-error" role="alert" style="display:none; color: var(--error)">Preencha os campos obrigatórios antes de enviar.</p>
+            <div class="form-success" id="form-success" role="status">Recebemos seus dados. Um especialista da DPS vai entrar em contato em breve.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para imobiliárias e corretores -->
+  <section class="section-tint" id="para-imobiliarias" aria-labelledby="realtors-title">
+    <div class="container">
+      <div class="realtor-layout">
+        <div class="reveal">
+          <h2 id="realtors-title">Do outro lado da parceria, também tem gente ganhando</h2>
+          <p style="margin-top: var(--space-5)">Se você é imobiliária ou corretor, entrar na rede DPS significa acesso a empreendimentos que você não venderia sozinho, com regras claras de comissão e treinamento de produto antes de você falar com o primeiro cliente.</p>
+
+          <ul class="realtor-bullets">
+            <li class="realtor-bullet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Portfólio de incorporadoras [da região X] em um só lugar</span>
+            </li>
+            <li class="realtor-bullet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Comissão, prazo e responsabilidade definidos por contrato</span>
+            </li>
+            <li class="realtor-bullet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Treinamento de produto e argumentação antes de cada lançamento</span>
+            </li>
+            <li class="realtor-bullet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Um ponto de contato para tirar dúvida — sem depender de quem responde primeiro no grupo</span>
+            </li>
+          </ul>
+
+          <a href="#comece-agora" class="btn btn-accent">Quero entrar na rede DPS</a>
+        </div>
+
+        <div class="realtor-visual reveal">
+          <svg class="tri" style="top:-40px; right:-40px; width:180px; height:180px" viewBox="0 0 200 200" aria-hidden="true"><polygon points="100,10 190,180 10,180" fill="var(--dps-teal-500)" opacity="0.25"/></svg>
+          <img class="realtor-seal" loading="lazy" alt="Selo Parceria DPS — Gestão Imobiliária" src="images/logo-parceria-dps.jpg" width="140" height="140">
+          <p>Rede DPS — imobiliárias e corretores parceiros</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resultados -->
+  <section id="resultados" aria-labelledby="results-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Resultados</p>
+        <h2 id="results-title">Resultado de parceria bem gerida tem números</h2>
+      </div>
+
+      <div class="cards-grid">
+        <article class="card card-bar case-card reveal">
+          <span class="badge badge-neutral">[Case 1 — Incorporadora]</span>
+          <div class="case-stat">
+            <div><span class="stat-number">[X]%</span><span class="stat-label">aumento na velocidade de vendas</span></div>
+          </div>
+          <p class="body-small">[X] unidades vendidas em [X] meses.</p>
+          <p class="body-small">[Uma frase sobre o desafio e o que a DPS fez]</p>
+        </article>
+        <article class="card card-bar case-card reveal">
+          <span class="badge badge-neutral">[Case 2 — Escoamento de estoque]</span>
+          <div class="case-stat">
+            <div><span class="stat-number">[X]</span><span class="stat-label">unidades remanescentes vendidas em [X] meses</span></div>
+          </div>
+          <p class="body-small">[Uma frase sobre o desafio e o que a DPS fez]</p>
+        </article>
+        <article class="card card-bar case-card reveal">
+          <span class="badge badge-neutral">[Case 3 — Lançamento]</span>
+          <div class="case-stat">
+            <div><span class="stat-number">[X]%</span><span class="stat-label">do VGV vendido no primeiro fim de semana</span></div>
+          </div>
+          <p class="body-small">[Uma frase sobre o desafio e o que a DPS fez]</p>
+        </article>
+      </div>
+
+      <div style="text-align:center; margin-top: var(--space-8)">
+        <a href="#resultados" class="btn btn-secondary">Ver todos os cases</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Segmentos e regiões -->
+  <section class="segments-band" aria-labelledby="segments-title">
+    <div class="container">
+      <p class="eyebrow">Segmentos</p>
+      <h2 id="segments-title">Atuamos com incorporadoras de diferentes portes e produtos</h2>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Alto padrão</span><span>·</span><span>Médio padrão</span><span>·</span><span>Econômico e MCMV</span><span>·</span><span>Loteamentos</span><span>·</span><span>Comercial e salas</span><span>·</span><span>Multipropriedade</span><span>·</span><span>Condomínios de casas</span><span>·</span><span>Segunda moradia</span><span>·</span>
+        <span>Alto padrão</span><span>·</span><span>Médio padrão</span><span>·</span><span>Econômico e MCMV</span><span>·</span><span>Loteamentos</span><span>·</span><span>Comercial e salas</span><span>·</span><span>Multipropriedade</span><span>·</span><span>Condomínios de casas</span><span>·</span><span>Segunda moradia</span><span>·</span>
+      </div>
+    </div>
+    <ul class="visually-hidden">
+      <li>Alto padrão</li><li>Médio padrão</li><li>Econômico e MCMV</li><li>Loteamentos</li>
+      <li>Comercial e salas</li><li>Multipropriedade</li><li>Condomínios de casas</li><li>Segunda moradia</li>
+    </ul>
+
+    <div class="container">
+      <p class="segments-note">[Presença em X cidades / X estados]</p>
+    </div>
+  </section>
+
+  <!-- Sobre a DPS -->
+  <section id="sobre" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about-layout">
+        <div class="reveal">
+          <div class="about-video-wrap mask-reveal">
+            <video class="about-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+              <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260823_063501_2e2c8971-de1e-473a-8611-a0c9ae7ee186.mp4" type="video/mp4">
+            </video>
+            <div class="about-video-tint" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="eyebrow">Sobre a DPS</p>
+          <h2 id="about-title">Uma empresa que existe para fazer a parceria funcionar</h2>
+          <div style="margin-top: var(--space-5)">
+            <p>Na DPS, conectamos incorporadoras e imobiliárias de forma simples e eficiente. Criamos parcerias que impulsionam resultados e transformam negócios.</p>
+            <p>Nossa base é a excelência em tudo que fazemos: da gestão de parcerias ao treinamento contínuo da equipe. Colocamos as necessidades e os objetivos dos nossos clientes em primeiro lugar e adaptamos nossos serviços para garantir satisfação e sucesso.</p>
+          </div>
+
+          <div class="about-stats">
+            <div><span class="stat-number" style="font-size:32px">[+X]</span><p class="body-small">anos de mercado</p></div>
+            <div><span class="stat-number" style="font-size:32px">[+X]</span><p class="body-small">incorporadoras atendidas</p></div>
+            <div><span class="stat-number" style="font-size:32px">[+X]</span><p class="body-small">corretores treinados</p></div>
+            <div><span class="stat-number" style="font-size:32px">[R$ X]</span><p class="body-small">em VGV movimentado</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pilares -->
+  <section class="section-tint" aria-labelledby="pillars-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 id="pillars-title">O que sustenta cada parceria da DPS</h2>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="card reveal">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+          </div>
+          <h3>Excelência</h3>
+          <p>Padrão de entrega definido, acompanhado e cobrado. Da primeira reunião ao pós-venda.</p>
+        </div>
+        <div class="card reveal">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+          </div>
+          <h3>Foco no cliente</h3>
+          <p>Adaptamos o modelo ao seu produto e ao seu momento. Não temos um pacote único para vender.</p>
+        </div>
+        <div class="card reveal">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <h3>Treinamento contínuo</h3>
+          <p>Time e rede em formação permanente. Corretor bem treinado é a diferença entre apresentar um imóvel e vender um imóvel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Depoimentos</p>
+        <h2 id="testimonials-title">O que dizem as incorporadoras que trabalham com a DPS</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <figure class="card-testimonial reveal">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>
+            <p>[Depoimento 1 — nome, cargo, incorporadora, foto]</p>
+          </blockquote>
+          <figcaption class="testimonial-person">
+            <img class="testimonial-avatar" loading="lazy" alt="Foto de perfil do autor do depoimento 1" src="images/placeholder-avatar.svg">
+            <div>
+              <p class="testimonial-name">[Nome]</p>
+              <p class="testimonial-role">[Cargo, incorporadora]</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="card-testimonial reveal">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>
+            <p>[Depoimento 2 — nome, cargo, incorporadora, foto]</p>
+          </blockquote>
+          <figcaption class="testimonial-person">
+            <img class="testimonial-avatar" loading="lazy" alt="Foto de perfil do autor do depoimento 2" src="images/placeholder-avatar.svg">
+            <div>
+              <p class="testimonial-name">[Nome]</p>
+              <p class="testimonial-role">[Cargo, incorporadora]</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="card-testimonial reveal">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>
+            <p>[Depoimento 3 — nome, cargo, imobiliária parceira, foto]</p>
+          </blockquote>
+          <figcaption class="testimonial-person">
+            <img class="testimonial-avatar" loading="lazy" alt="Foto de perfil do autor do depoimento 3" src="images/placeholder-avatar.svg">
+            <div>
+              <p class="testimonial-name">[Nome]</p>
+              <p class="testimonial-role">[Cargo, imobiliária parceira]</p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-tint" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Perguntas frequentes</p>
+        <h2 id="faq-title">Perguntas frequentes</h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+            <h3>A DPS é uma imobiliária?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
+            <div class="faq-answer-inner"><p>Não. Não concorremos com as imobiliárias — nós as organizamos. A DPS faz a gestão da relação entre a sua incorporadora e a rede de parceiros que vende o seu produto: seleção, treinamento, regras, acompanhamento e reporte.</p></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+            <h3>Vocês substituem meu time interno de vendas?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
+            <div class="faq-answer-inner"><p>Não. Trabalhamos junto com o seu time. A estrutura interna cuida do que já domina; a DPS amplia o alcance com uma rede externa de parceiros e assume a gestão dessa rede, que costuma ser a parte que ninguém tem tempo de fazer.</p></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+            <h3>Como funciona a remuneração?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
+            <div class="faq-answer-inner"><p>[Descrever o modelo real: fee mensal, comissão sobre venda, modelo híbrido, projeto fechado.] Definimos o formato no diagnóstico, de acordo com o modelo de atuação escolhido.</p></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+            <h3>Minha incorporadora já tem imobiliárias parceiras. Faz sentido falar com a DPS?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
+            <div class="faq-answer-inner"><p>Faz — e normalmente é aí que o ganho aparece mais rápido. Na maioria dos casos, as parcerias já existem, mas funcionam no improviso. Estruturar o que já está em pé costuma dar resultado antes de trazer parceiro novo.</p></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+            <h3>Em quanto tempo vejo resultado?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
+            <div class="faq-answer-inner"><p>Depende do produto, da região e do estágio do empreendimento. [Descrever prazos típicos observados.] No diagnóstico definimos metas e prazos realistas antes de começar, e acompanhamos em [frequência].</p></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+            <h3>Como vocês garantem a qualidade do atendimento dos parceiros?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6">
+            <div class="faq-answer-inner"><p>Três frentes: curadoria na entrada, treinamento de produto antes da venda e acompanhamento de indicadores durante. Parceiro que não mantém o padrão sai da rede.</p></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">
+            <h3>Vocês atuam em quais regiões?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a7" role="region" aria-labelledby="faq-q7">
+            <div class="faq-answer-inner"><p>[Listar cidades e estados.] Também estruturamos rede em praças novas para incorporadoras que estão expandindo.</p></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a8" id="faq-q8">
+            <h3>Sou corretor autônomo. Posso entrar na rede?</h3>
+            <span class="icon-plus" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer" id="faq-a8" role="region" aria-labelledby="faq-q8">
+            <div class="faq-answer-inner"><p>[Sim / Não — descrever critérios.]</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="cta-final" aria-labelledby="final-cta-title">
+    <canvas class="particles-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <h2 id="final-cta-title">Tudo isso com excelência, foco no cliente e serviços que entregam qualidade.</h2>
+      <p class="lead">Quer potencializar seus resultados com a DPS? Vem conversar com a gente.</p>
+      <div class="cta-final-actions">
+        <a href="#comece-agora" class="btn btn-on-dark">Quero uma proposta de parceria</a>
+        <a href="https://wa.me/" class="btn btn-secondary" style="border-color:#fff; color:#fff" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+      </div>
+      <p class="risk-line">Diagnóstico gratuito e sem compromisso. Se não fizer sentido para o seu momento, a gente fala isso na primeira reunião.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo" aria-label="DPS Gestão Imobiliária, página inicial">
+          <img class="footer-seal" loading="lazy" alt="Selo Parceria DPS" src="images/logo-parceria-dps.jpg" width="56" height="56">
+          <span class="logo-text">
+            <span class="logo-word">DPS</span>
+            <span class="logo-sub">Gestão Imobiliária</span>
+          </span>
+        </a>
+        <p>Conectamos incorporadoras e imobiliárias e fazemos a gestão completa dessa parceria.</p>
+        <div class="footer-social" style="margin-top: var(--space-6)">
+          <a href="#" aria-label="DPS no Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+          <a href="#" aria-label="DPS no LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" aria-label="DPS no YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.5 8.5s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5h0s-4.9 0-7.6.2c-.4 0-1.3.1-2.1 1-.6.7-.8 2.3-.8 2.3S1.3 10.4 1.3 12.3v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.3.2 7.3.2s4.9 0 7.6-.3c.4 0 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-1.9.2-3.8v-1.8c0-1.9-.2-3.8-.2-3.8z"/><polygon points="9.8 15.5 15.5 12.3 9.8 9 9.8 15.5" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Falar com a DPS no WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>DPS</h4>
+        <ul>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#solucoes">Soluções</a></li>
+          <li><a href="#resultados">Cases</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Trabalhe conosco</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Para incorporadoras</h4>
+        <ul>
+          <li><a href="#solucoes">Gestão contínua</a></li>
+          <li><a href="#solucoes">Lançamentos</a></li>
+          <li><a href="#solucoes">Escoamento de estoque</a></li>
+          <li><a href="#solucoes">Expansão regional</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Para imobiliárias</h4>
+        <ul>
+          <li><a href="#para-imobiliarias">Entrar na rede</a></li>
+          <li><a href="#para-imobiliarias">Portfólio de empreendimentos</a></li>
+          <li><a href="#para-imobiliarias">Treinamentos</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-col" style="margin-bottom: var(--space-8)">
+      <h4>Contato</h4>
+      <p class="body-small" style="color: var(--dps-mist)">[Telefone] · [E-mail] · [Endereço] · [CRECI]</p>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="caption">© [ano] DPS Gestão Imobiliária</p>
+      <div class="footer-legal">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="#">Política de Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pointerFine = window.matchMedia('(pointer: fine)').matches;
+
+  // Header shadow + transparent-over-hero on scroll
+  var header = document.getElementById('site-header');
+  var heroEl = document.getElementById('top');
+  var onScroll = function () {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (heroEl) {
+      var threshold = heroEl.offsetHeight - header.offsetHeight;
+      header.classList.toggle('is-transparent', window.scrollY < threshold);
+    }
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+
+  // Background video autoplay: retry aggressively, browsers routinely defer/refuse autoplay
+  var bgVideos = [document.querySelector('.hero-video-bg'), document.querySelector('.about-video')];
+  bgVideos.forEach(function (video) {
+    if (!video) return;
+    var tryPlay = function () {
+      video.muted = true;
+      var p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(function () {});
+    };
+    tryPlay();
+    var retry = window.setInterval(tryPlay, 1000);
+    video.addEventListener('playing', function () { window.clearInterval(retry); }, { once: true });
+    document.addEventListener('click', tryPlay, { once: true, passive: true });
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+  });
+
+  // Mobile menu toggle
+  var navToggle = document.getElementById('nav-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  navToggle.addEventListener('click', function () {
+    var expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!expanded));
+    navToggle.setAttribute('aria-label', expanded ? 'Abrir menu de navegação' : 'Fechar menu de navegação');
+    mobileMenu.classList.toggle('is-open', !expanded);
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Abrir menu de navegação');
+      mobileMenu.classList.remove('is-open');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var answer = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', String(!expanded));
+      answer.classList.toggle('is-open', !expanded);
+    });
+  });
+
+  // Lead form (no backend configured — confirms locally)
+  var form = document.getElementById('lead-form');
+  var errorEl = document.getElementById('form-error');
+  var successEl = document.getElementById('form-success');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      errorEl.style.display = 'block';
+      successEl.classList.remove('is-visible');
+      var firstInvalid = form.querySelector(':invalid');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+    errorEl.style.display = 'none';
+    successEl.classList.add('is-visible');
+    form.reset();
+    successEl.setAttribute('tabindex', '-1');
+    successEl.focus();
+  });
+
+  // Scroll reveal — cascades siblings that reveal together (cards, pillars, testimonials)
+  var revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var siblings = Array.prototype.filter.call(el.parentElement.children, function (c) {
+            return c.classList.contains('reveal');
+          });
+          if (siblings.length > 1) {
+            var idx = siblings.indexOf(el);
+            el.style.transitionDelay = (Math.min(idx, 6) * 70) + 'ms';
+          }
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { observer.observe(el); });
+  }
+
+  // Word-split reveal for the hero staircase headline and section titles
+  var wordDelay = function (container) {
+    var words = container.querySelectorAll('.word');
+    words.forEach(function (w, i) { w.style.transitionDelay = (i * 45) + 'ms'; });
+  };
+  var splitIntoWords = function (el) {
+    var text = el.textContent.trim();
+    el.innerHTML = text.split(/\s+/).map(function (w) {
+      return '<span class="word-wrap"><span class="word">' + w + '</span></span>';
+    }).join(' ');
+    wordDelay(el);
+  };
+  var titleTargets = [];
+  var heroHeading = document.querySelector('.hero-heading');
+  if (heroHeading) { wordDelay(heroHeading); titleTargets.push(heroHeading); }
+  document.querySelectorAll('main h2').forEach(function (h2) {
+    h2.classList.add('split-title');
+    splitIntoWords(h2);
+    titleTargets.push(h2);
+  });
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    titleTargets.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var titleObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          titleObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4, rootMargin: '0px 0px -10% 0px' });
+    titleTargets.forEach(function (el) { titleObserver.observe(el); });
+  }
+
+  // Mask-wipe reveal for media panels
+  var maskEls = document.querySelectorAll('.mask-reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    maskEls.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var maskObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          maskObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    maskEls.forEach(function (el) { maskObserver.observe(el); });
+  }
+
+  // Magnetic pull on primary CTAs
+  if (!reduceMotion && pointerFine) {
+    document.querySelectorAll('.btn-primary, .btn-accent').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width / 2) * 0.25;
+        var y = (e.clientY - r.top - r.height / 2) * 0.35;
+        btn.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+    });
+  }
+
+  // Soft cursor light inside the hero
+  if (!reduceMotion && pointerFine && heroEl) {
+    var glow = heroEl.querySelector('.hero-cursor-glow');
+    if (glow) {
+      heroEl.addEventListener('mousemove', function (e) {
+        var r = heroEl.getBoundingClientRect();
+        glow.style.left = (e.clientX - r.left) + 'px';
+        glow.style.top = (e.clientY - r.top) + 'px';
+        glow.style.opacity = '1';
+      });
+      heroEl.addEventListener('mouseleave', function () { glow.style.opacity = '0'; });
+    }
+  }
+
+  // Scroll-linked parallax on the hero & about videos — ties motion directly to scroll position
+  if (!reduceMotion) {
+    var heroVideo = document.querySelector('.hero-video-bg');
+    var aboutVideo = document.querySelector('.about-video');
+    var ticking = false;
+    var updateParallax = function () {
+      ticking = false;
+      if (heroVideo && heroEl) {
+        var heroProgress = Math.min(Math.max(window.scrollY / heroEl.offsetHeight, 0), 1);
+        heroVideo.style.transform = 'translateY(' + (heroProgress * 60) + 'px)';
+      }
+      if (aboutVideo) {
+        var rect = aboutVideo.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        if (rect.bottom > 0 && rect.top < vh) {
+          var centered = (rect.top + rect.height / 2 - vh / 2) / vh;
+          aboutVideo.style.transform = 'translateY(' + (centered * -40) + 'px) scale(1.12)';
+        }
+      }
+    };
+    document.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(updateParallax); ticking = true; }
+    }, { passive: true });
+    updateParallax();
+  }
+
+  // Scroll progress bar
+  var progressBar = document.getElementById('scroll-progress');
+  if (progressBar) {
+    var updateProgress = function () {
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    };
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // The ambient background is a single fixed layer already in the markup (see .ambient-bg) —
+  // no per-section injection needed, which is exactly what removed the seams between sections.
+
+  // Timeline: connecting line grows and step numbers light up as you scroll through "Como começar"
+  var stepsEl = document.querySelector('.start-steps');
+  if (stepsEl) {
+    var timelineProgressEl = stepsEl.querySelector('.start-steps-progress');
+    var timelineSteps = stepsEl.querySelectorAll('.start-step');
+    var updateTimeline = function () {
+      var rect = stepsEl.getBoundingClientRect();
+      var raw = (window.innerHeight * 0.7 - rect.top) / rect.height;
+      var progress = Math.min(Math.max(raw, 0), 1);
+      var lineHeight = stepsEl.offsetHeight - 36;
+      timelineProgressEl.style.height = Math.max(progress * lineHeight, 0) + 'px';
+      timelineSteps.forEach(function (step, i) {
+        var stepThreshold = i / (timelineSteps.length - 1 || 1);
+        step.classList.toggle('is-active', progress >= stepThreshold - 0.02);
+      });
+    };
+    document.addEventListener('scroll', function () { window.requestAnimationFrame(updateTimeline); }, { passive: true });
+    window.addEventListener('resize', updateTimeline, { passive: true });
+    updateTimeline();
+  }
+
+  // Connected-particles canvas behind the closing CTA — only animates while on screen
+  var particlesCanvas = document.querySelector('.particles-canvas');
+  if (particlesCanvas && !reduceMotion && 'requestAnimationFrame' in window) {
+    var pCtx = particlesCanvas.getContext('2d');
+    var pSection = particlesCanvas.closest('section');
+    var particles = [];
+    var rafId = null;
+    var resizeParticles = function () {
+      particlesCanvas.width = pSection.offsetWidth;
+      particlesCanvas.height = pSection.offsetHeight;
+      var count = Math.min(46, Math.floor((particlesCanvas.width * particlesCanvas.height) / 20000));
+      particles = [];
+      for (var i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * particlesCanvas.width,
+          y: Math.random() * particlesCanvas.height,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35
+        });
+      }
+    };
+    var drawParticles = function () {
+      pCtx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+      particles.forEach(function (p) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > particlesCanvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > particlesCanvas.height) p.vy *= -1;
+      });
+      for (var i = 0; i < particles.length; i++) {
+        for (var j = i + 1; j < particles.length; j++) {
+          var dx = particles[i].x - particles[j].x;
+          var dy = particles[i].y - particles[j].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            pCtx.strokeStyle = 'rgba(255,255,255,' + (0.16 * (1 - dist / 120)) + ')';
+            pCtx.lineWidth = 1;
+            pCtx.beginPath();
+            pCtx.moveTo(particles[i].x, particles[i].y);
+            pCtx.lineTo(particles[j].x, particles[j].y);
+            pCtx.stroke();
+          }
+        }
+      }
+      particles.forEach(function (p) {
+        pCtx.fillStyle = 'rgba(255,255,255,.55)';
+        pCtx.beginPath();
+        pCtx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+        pCtx.fill();
+      });
+      rafId = window.requestAnimationFrame(drawParticles);
+    };
+    var startParticles = function () { if (!rafId) drawParticles(); };
+    var stopParticles = function () { if (rafId) { window.cancelAnimationFrame(rafId); rafId = null; } };
+    resizeParticles();
+    window.addEventListener('resize', resizeParticles, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { entry.isIntersecting ? startParticles() : stopParticles(); });
+      }, { threshold: 0.05 }).observe(pSection);
+    } else {
+      startParticles();
+    }
+  }
+
+  // Custom cursor — desktop pointer only, mirrors the naocodei "cursor personalizado" pattern
+  if (!reduceMotion && pointerFine) {
+    var cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    var cursorRing = document.createElement('div');
+    cursorRing.className = 'cursor-ring';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorRing);
+    document.body.classList.add('has-custom-cursor');
+    var cx = -100, cy = -100, ringX = -100, ringY = -100;
+    document.addEventListener('mousemove', function (e) {
+      cx = e.clientX; cy = e.clientY;
+      cursorDot.style.left = cx + 'px';
+      cursorDot.style.top = cy + 'px';
+    });
+    (function animateCursorRing() {
+      ringX += (cx - ringX) * 0.18;
+      ringY += (cy - ringY) * 0.18;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      window.requestAnimationFrame(animateCursorRing);
+    })();
+    document.querySelectorAll('a, button, .btn').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { cursorRing.classList.add('is-active'); });
+      el.addEventListener('mouseleave', function () { cursorRing.classList.remove('is-active'); });
+    });
+  }
+})();
+</script>
+</body>
+</html>
