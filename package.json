@@ -1,0 +1,13 @@
+{
+  "name": "site-dps-parcerias",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page da DPS Gestão Imobiliária. Ferramentas de dev apenas (o site em si continua HTML puro, sem build).",
+  "scripts": {
+    "optimize-images": "node scripts/optimize-images.js",
+    "optimize-images:watch": "node scripts/optimize-images.js --watch"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  }
+}

@@ -18,3 +18,10 @@ Desktop.ini
 # Variáveis de ambiente (caso alguma venha a ser usada)
 .env
 .env.local
+
+# Dependências Node (usadas só pelo script de otimização de imagens)
+node_modules/
+
+# Imagens originais/brutas — arquivo de origem, não o que o site serve.
+# Guarde uma cópia de backup fora do repositório se quiser preservá-las.
+media-fonte/
