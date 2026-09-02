@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termos de Uso e Política de Cookies: DPS Gestão Imobiliária</title>
+<meta name="description" content="Termos de uso do site da DPS Gestão Imobiliária e nossa política de cookies: uso permitido do site, propriedade intelectual, limitação de responsabilidade e como gerenciamos cookies de navegação.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#0A3A4E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { min-height: 100vh; }
+  img { max-width: 100%; display: block; }
+  button { font: inherit; cursor: pointer; }
+  a { color: inherit; }
+  ul { list-style: none; }
+  input, textarea, select { font: inherit; }
+
+  /* ---------- Design tokens ---------- */
+  :root {
+    --dps-blue-900:  #0A3A4E;
+    --dps-blue-700:  #0F506C;
+    --dps-blue-500:  #237986;
+    --dps-teal-500:  #019B99;
+    --dps-teal-700:  #00807F;
+    --dps-teal-200:  #7FD4D0;
+    --dps-ink:       #000000;
+    --dps-mist:      #B9CFD3;
+    --dps-tint:      #F1F7F9;
+    --dps-sand:      #F3F3F3;
+    --dps-gradient:  linear-gradient(120deg,#0A3A4E 0%,#0F506C 35%,#237986 65%,#019B99 100%);
+    --dps-hero-bg:      #D8E9F0;
+    --dps-hero-bg-rgb:  216,233,240;
+    --header-height: 80px;
+    --ease-elastic:  cubic-bezier(.2,.9,.28,1.28);
+    --ease-wipe:     cubic-bezier(.65,0,.15,1);
+
+    --text-primary:   #0A3A4E;
+    --text-body:      #1F2E36;
+    --text-secondary: #4A5C66;
+    --text-inverse:   #FFFFFF;
+    --surface:        #FFFFFF;
+    --border:         #D8E3E7;
+    --border-subtle:  #E6EEF1;
+
+    --success: #0E7C5A;
+    --error:   #B3261E;
+    --warning: #9A6700;
+
+    --font-display: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --radius-sm: 4px;  --radius-md: 8px;  --radius-lg: 12px;
+    --radius-xl: 20px; --radius-full: 999px;
+
+    --shadow-xs: 0 1px 2px rgba(10,58,78,.06);
+    --shadow-sm: 0 1px 3px rgba(10,58,78,.08);
+    --shadow-md: 0 8px 24px rgba(10,58,78,.10);
+    --shadow-lg: 0 16px 40px rgba(10,58,78,.14);
+    --shadow-focus: 0 0 0 3px rgba(15,80,108,.14);
+
+    --space-1:4px;  --space-2:8px;   --space-3:12px; --space-4:16px; --space-5:24px;
+    --space-6:32px; --space-7:48px;  --space-8:64px; --space-9:96px; --space-10:128px;
+
+    --container: 1200px;
+    --container-narrow: 760px;
+
+    --ease: cubic-bezier(.4,0,.2,1);
+    --duration-fast: 150ms;
+    --duration-base: 200ms;
+    --duration-slow: 400ms;
+  }
+
+  /* ---------- Base ---------- */
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-body);
+    background: var(--surface);
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; color: var(--text-primary); }
+
+  h1 { font-size: 36px; line-height: 1.1; letter-spacing: -0.02em; }
+  h2 { font-size: 28px; line-height: 1.15; letter-spacing: -0.015em; }
+  h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.01em; }
+  h4 { font-size: 18px; line-height: 1.3; }
+
+  .lead { font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.6; color: var(--text-secondary); }
+  p { max-width: 62ch; }
+  .body-small { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-display); font-weight: 600; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--dps-teal-700);
+    margin-bottom: var(--space-3);
+  }
+  .caption { font-size: 12px; line-height: 1.45; color: var(--text-secondary); }
+  strong, b { font-weight: 600; color: inherit; }
+
+  @media (min-width: 1024px) {
+    h1 { font-size: 60px; }
+    h2 { font-size: 40px; }
+    h3 { font-size: 28px; }
+    h4 { font-size: 20px; }
+    .lead { font-size: 20px; }
+    body { font-size: 17px; }
+    .eyebrow { font-size: 13px; }
+  }
+
+  /* ---------- Focus ---------- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--dps-teal-500);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ---------- Layout ---------- */
+  .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+  .container-narrow { width: 100%; max-width: var(--container-narrow); margin: 0 auto; }
+  @media (min-width: 1024px) { .container { padding: 0 40px; } }
+
+  section { padding: 64px 0; }
+  @media (min-width: 1024px) { section { padding: 96px 0; } }
+  main > section { position: relative; }
+
+  /* ---------- Ambient background: ONE fixed backdrop behind the whole page, not one per section.
+     A separate instance per section created a hard seam at every boundary (each section's blob
+     pattern started fresh and got clipped at its own edge); a single fixed layer is continuous by
+     construction — sections sit as mostly-transparent panes over the same backdrop, so nothing
+     visibly "ends" as you scroll from one into the next. */
+  .ambient-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .ambient-bg span { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .22; will-change: transform; }
+  .ambient-bg span:nth-child(1) { width: 46vw; height: 46vw; max-width: 520px; max-height: 520px; background: var(--dps-teal-500); top: -12vh; left: -10vw; animation: driftA 26s ease-in-out infinite; }
+  .ambient-bg span:nth-child(2) { width: 40vw; height: 40vw; max-width: 460px; max-height: 460px; background: var(--dps-blue-500); bottom: -14vh; right: -8vw; animation: driftB 32s ease-in-out infinite; }
+  .ambient-bg span:nth-child(3) { width: 30vw; height: 30vw; max-width: 340px; max-height: 340px; background: var(--dps-teal-200); top: 42vh; right: 22vw; opacity: .16; animation: driftC 22s ease-in-out infinite; }
+  @keyframes driftA { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(50px, 60px) scale(1.08); } }
+  @keyframes driftB { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-60px, -40px) scale(1.1); } }
+  @keyframes driftC { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px, 50px) scale(1.18); } }
+  @media (prefers-reduced-motion: reduce) { .ambient-bg span { animation: none; } }
+
+  /* ---------- Custom cursor (desktop, pointer:fine only) ---------- */
+  /* mix-blend-mode: difference inverts against whatever's underneath, so it stays
+     visible over the teal ambient blobs, the dark hero video and plain white alike —
+     a fixed color would wash out against backgrounds close to it. */
+  body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button { cursor: none; }
+  .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: difference; }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; }
+  .cursor-ring {
+    width: 32px; height: 32px; border: 1.5px solid #fff; background: transparent;
+    transition: width .25s var(--ease-elastic), height .25s var(--ease-elastic), background .25s var(--ease);
+  }
+  .cursor-ring.is-active { width: 54px; height: 54px; background: rgba(255,255,255,.3); }
+
+  /* Semi-transparent, not solid: lets the fixed ambient backdrop read through evenly,
+     so tinted and plain sections feel like the same continuous surface, not separate blocks. */
+  .section-tint { background: rgba(241,247,249,.65); }
+  .section-dark { background: var(--dps-blue-900); color: var(--text-inverse); }
+  .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--text-inverse); }
+  .section-dark p, .section-dark .lead { color: var(--dps-mist); }
+  .section-dark .eyebrow { color: var(--dps-teal-200); } /* teal-700 dá só 2,8:1 sobre blue-900 — teal-200 é 7,08:1 AAA */
+
+  .section-head { max-width: var(--container-narrow); margin-bottom: var(--space-8); }
+  .section-head h2 { margin-top: var(--space-4); }
+  .section-head .lead { margin-top: var(--space-4); }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 200;
+    background: var(--dps-blue-900); color: #fff; padding: 12px 20px;
+    border-radius: var(--radius-md);
+  }
+  .skip-link:focus { left: 20px; top: 20px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 16px 32px;
+    font-family: var(--font-body); font-weight: 600; font-size: 16px; letter-spacing: 0.01em;
+    border-radius: var(--radius-md); border: none; text-decoration: none;
+    transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--dps-blue-700); color: #fff;
+    box-shadow: 0 1px 2px rgba(10,58,78,.12);
+  }
+  .btn-primary:hover { background: var(--dps-blue-900); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-primary:active { transform: translateY(0); box-shadow: none; }
+
+  .btn-secondary {
+    background: transparent; color: var(--dps-blue-700);
+    border: 1.5px solid var(--dps-blue-700);
+  }
+  .btn-secondary:hover { background: var(--dps-tint); border-color: var(--dps-blue-900); color: var(--dps-blue-900); }
+
+  .btn-accent { background: var(--dps-teal-700); color: #fff; }
+  .btn-accent:hover { background: #016B6A; }
+
+  .btn-on-dark { background: #fff; color: var(--dps-blue-900); }
+  .btn-on-dark:hover { background: var(--dps-tint); }
+
+  .btn-text {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--dps-blue-700); font-weight: 500; font-size: 16px;
+    background: none; border: none; padding: 4px 0; min-height: 44px;
+    text-decoration: none; position: relative;
+  }
+  .btn-text .arrow { transition: transform var(--duration-fast) var(--ease); }
+  .btn-text:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .btn-text:hover .arrow { transform: translateX(4px); }
+
+  .btn-block { width: 100%; }
+
+  /* ---------- Badge ---------- */
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 6px 14px; border-radius: var(--radius-full);
+    font-family: var(--font-body); font-weight: 600; font-size: 13px;
+  }
+  .badge-neutral { background: var(--dps-tint); color: var(--dps-blue-700); }
+  .badge-accent { background: rgba(1,155,153,.12); color: var(--dps-teal-700); }
+  .badge-on-dark { border: 1px solid rgba(255,255,255,.28); color: #fff; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--surface); border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg); padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
+    position: relative; overflow: hidden;
+  }
+  @media (min-width: 1024px) { .card { padding: 32px; } }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--dps-mist); }
+  .card-bar::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--dps-gradient);
+  }
+  .card h3 { margin-bottom: var(--space-3); }
+  .card p { margin-top: var(--space-2); }
+
+  .card-dark {
+    background: var(--dps-blue-700); color: #fff; border: none; box-shadow: none;
+    border-radius: var(--radius-lg); padding: 32px;
+  }
+  .card-dark .stat-number { color: var(--dps-teal-200); }
+  .card-dark p { color: var(--dps-mist); }
+
+  .stat-number {
+    display: block; font-family: var(--font-display); font-weight: 700;
+    font-size: 40px; line-height: 1; letter-spacing: -0.03em; color: var(--dps-blue-900);
+    margin-bottom: var(--space-2);
+  }
+  @media (min-width: 1024px) { .stat-number { font-size: 64px; } }
+
+  .card-testimonial {
+    background: var(--dps-tint); border: none; border-radius: var(--radius-lg);
+    padding: 32px; box-shadow: none; position: relative;
+  }
+  .card-testimonial .quote-mark {
+    font-family: var(--font-display); font-size: 48px; color: var(--dps-teal-500);
+    opacity: .2; line-height: 1; position: absolute; top: 20px; right: 24px;
+  }
+  .testimonial-person { display: flex; align-items: center; gap: 12px; margin-top: var(--space-5); }
+  .testimonial-avatar { width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; }
+  .testimonial-name { font-family: var(--font-body); font-weight: 600; color: var(--dps-blue-900); font-size: 15px; }
+  .testimonial-role { font-size: 14px; color: var(--text-secondary); }
+
+  /* Depoimentos em vídeo — mesmo card .card-testimonial (fundo tint, radius-lg), só troca
+     a citação em texto por uma miniatura 9:16 (proporção real do Shorts, sem as barras
+     desfocadas que o YouTube usa pra preencher o quadro 16:9 da thumbnail). Facade
+     leve: só carrega o iframe do YouTube quando alguém realmente clica no play — os
+     três vídeos não pesam nada na carga inicial da página. */
+  /* Sem isso, uma coluna única (mobile e tablet) deixa o card esticar até a largura
+     cheia do grid — numa proporção 9:16 isso vira uma miniatura absurdamente alta.
+     Trava numa largura confortável e centraliza; no desktop de 3 colunas o valor já
+     bate perto da largura natural da célula, então não muda quase nada lá. */
+  .video-testimonial { padding: 0; overflow: hidden; max-width: 320px; width: 100%; margin: 0 auto; }
+  .video-testimonial-media {
+    position: relative; aspect-ratio: 9 / 16; background: var(--dps-blue-900);
+    cursor: pointer; overflow: hidden;
+  }
+  .video-testimonial-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-testimonial-media iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video-testimonial-media::after {
+    content: ""; position: absolute; inset: auto 0 0 0; height: 40%; pointer-events: none;
+    background: linear-gradient(180deg, rgba(10,58,78,0) 0%, rgba(10,58,78,.7) 100%);
+  }
+  .video-testimonial-media.is-playing::after { display: none; }
+  .video-testimonial-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 56px; height: 56px; border-radius: 50%; background: #fff;
+    display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg);
+    transition: transform var(--duration-fast) var(--ease);
+  }
+  .video-testimonial-play svg { width: 20px; height: 20px; color: var(--dps-teal-700); margin-left: 3px; }
+  .video-testimonial-media:hover .video-testimonial-play { transform: translate(-50%, -50%) scale(1.08); }
+  .video-testimonial-badge {
+    position: absolute; left: var(--space-4); bottom: var(--space-4); z-index: 1;
+  }
+  .video-testimonial-caption { padding: var(--space-5) var(--space-6) var(--space-6); }
+
+  /* ---------- Forms ---------- */
+  .form-group { margin-bottom: 20px; }
+  .form-label {
+    display: block; font-size: 14px; font-weight: 500; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .form-label .required { color: var(--dps-teal-700); margin-left: 2px; }
+  .form-control {
+    width: 100%; min-height: 52px; padding: 14px 16px;
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius-md);
+    color: var(--text-body); font-size: 16px; font-family: var(--font-body);
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+  }
+  .form-control::placeholder { color: #7A8C94; }
+  .form-control:hover { border-color: var(--dps-mist); }
+  .form-control:focus { border-color: var(--dps-blue-700); box-shadow: var(--shadow-focus); outline: none; }
+  textarea.form-control { min-height: 120px; resize: vertical; }
+
+  .form-consent { display: flex; align-items: flex-start; gap: 10px; margin: 24px 0; }
+  .form-consent input[type="checkbox"] {
+    width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid var(--border);
+    flex-shrink: 0; margin-top: 2px; accent-color: var(--dps-blue-700);
+  }
+  .form-consent label { font-size: 13px; color: var(--text-secondary); }
+
+  .form-note { margin-top: 16px; font-size: 13px; color: var(--text-secondary); }
+  .form-success {
+    display: none; background: var(--dps-tint); border: 1.5px solid var(--success);
+    border-radius: var(--radius-md); padding: 20px; color: var(--text-body); font-size: 15px;
+  }
+  .form-success.is-visible { display: block; }
+
+  /* ---------- Header ---------- */
+  .top-accent { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: var(--dps-gradient); z-index: 101; }
+  .scroll-progress { position: fixed; top: 4px; left: 0; height: 2px; width: 0%; background: var(--dps-teal-500); z-index: 101; pointer-events: none; }
+
+  body { padding-top: var(--header-height); }
+
+  header.site-header {
+    position: fixed; top: 4px; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,.96);
+    backdrop-filter: blur(6px); border-bottom: 1px solid transparent;
+    transition: background var(--duration-slow) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
+  }
+  header.site-header.is-scrolled { box-shadow: var(--shadow-xs); border-color: var(--border-subtle); }
+
+  /* Transparent overlay while the hero video is in view.
+     The video has both light and dark regions, so white nav text alone isn't reliably
+     legible — a soft dark scrim sits behind the nav content to guarantee contrast either way. */
+  header.site-header.is-transparent { background: transparent; backdrop-filter: none; box-shadow: none; border-color: transparent; }
+  header.site-header.is-transparent::before {
+    content: ""; position: absolute; inset: 0 0 -28px 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(8,20,24,.42) 0%, rgba(8,20,24,.20) 65%, rgba(8,20,24,0) 100%);
+  }
+  header.site-header.is-transparent .logo-word { -webkit-text-fill-color: #fff; background: none; color: #fff; }
+  header.site-header.is-transparent .logo-word,
+  header.site-header.is-transparent .logo-sub,
+  header.site-header.is-transparent .nav-menu a { text-shadow: 0 1px 6px rgba(0,0,0,.45); }
+  header.site-header.is-transparent .logo-sub { color: rgba(255,255,255,.85); }
+  header.site-header.is-transparent .nav-menu a { color: #fff; }
+  header.site-header.is-transparent .nav-menu a::after { background: #fff; }
+  header.site-header.is-transparent .nav-cta.btn-primary { background: rgba(255,255,255,.16); color: #fff; box-shadow: none; border: 1.5px solid rgba(255,255,255,.6); }
+  header.site-header.is-transparent .nav-cta.btn-primary:hover { background: rgba(255,255,255,.28); }
+  header.site-header.is-transparent .nav-toggle { color: #fff; }
+  header.site-header.is-transparent .nav-toggle:hover { background: rgba(255,255,255,.16); }
+  .logo-word, .nav-menu a, .nav-cta.btn-primary, .nav-toggle { transition: color var(--duration-slow) var(--ease), background var(--duration-slow) var(--ease), border-color var(--duration-slow) var(--ease), text-shadow var(--duration-slow) var(--ease); }
+
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1; }
+  .logo-word {
+    font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em;
+    background: var(--dps-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .logo-sub {
+    font-family: var(--font-body); font-weight: 400; font-size: 9px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-secondary); margin-top: 3px;
+  }
+
+  .nav-menu { display: none; align-items: center; gap: var(--space-6); }
+  .nav-menu a {
+    font-size: 15px; font-weight: 500; color: var(--text-body); text-decoration: none;
+    padding: 10px 2px; position: relative;
+  }
+  .nav-menu a:hover { color: var(--dps-blue-700); }
+  .nav-menu a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px;
+    background: var(--dps-teal-700); transform: scaleX(0); transition: transform var(--duration-fast) var(--ease);
+  }
+  .nav-menu a:hover::after { transform: scaleX(1); }
+
+  .nav-cta { display: none; }
+  .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: none; border: none; border-radius: var(--radius-md);
+  }
+  .nav-toggle:hover { background: var(--dps-tint); }
+  .nav-toggle svg { width: 24px; height: 24px; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+  .mobile-menu {
+    display: none; flex-direction: column; gap: var(--space-1);
+    padding: var(--space-4) 0 var(--space-6); border-top: 1px solid var(--border-subtle);
+  }
+  .mobile-menu.is-open { display: flex; }
+  .mobile-menu a {
+    padding: 14px 4px; font-size: 16px; font-weight: 500; color: var(--text-body); text-decoration: none;
+    border-radius: var(--radius-md); min-height: 44px; display: flex; align-items: center;
+  }
+  .mobile-menu a:hover { background: var(--dps-tint); color: var(--dps-blue-700); }
+  .mobile-menu .btn { margin-top: var(--space-3); }
+
+  @media (min-width: 1024px) {
+    .nav-menu { display: flex; }
+    .nav-cta { display: inline-flex; }
+    .nav-toggle { display: none; }
+    .mobile-menu { display: none !important; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: 100svh;
+    margin-top: calc(-1 * var(--header-height));
+    display: flex; align-items: flex-end;
+    /* Fades into the tone the next section settles at, instead of a flat color that
+       cuts hard against it — that flat block against a blob-tinted section is what read
+       as a visible band at the seam. */
+    background: linear-gradient(180deg, var(--dps-hero-bg) 0%, var(--dps-hero-bg) 93%, #F6FAFB 100%);
+    padding: calc(var(--header-height) + 48px) 0 64px;
+  }
+  .hero-bottom-glow {
+    position: absolute; left: 0; right: 0; bottom: -10%; height: 45%; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .hero-bottom-glow span {
+    position: absolute; border-radius: 50%; filter: blur(70px); opacity: .28; will-change: transform;
+  }
+  .hero-bottom-glow span:nth-child(1) { width: 42vw; height: 42vw; max-width: 480px; max-height: 480px; background: var(--dps-teal-500); left: -8vw; bottom: -18vw; animation: driftA 26s ease-in-out infinite; }
+  .hero-bottom-glow span:nth-child(2) { width: 32vw; height: 32vw; max-width: 380px; max-height: 380px; background: var(--dps-blue-500); right: 6vw; bottom: -14vw; opacity: .2; animation: driftB 30s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .hero-bottom-glow span { animation: none; } }
+  @media (min-width: 1024px) { .hero { padding: calc(var(--header-height) + 64px) 0 96px; } }
+
+  /* Straddles the hero/next-section boundary — sits in the NEXT section (not the hero,
+     which clips its own overflow) with a negative top so it bleeds up over the seam.
+     Heavily blurred on purpose: a crisp vector edge reads as a line no matter what shape
+     it's cut into, wavy or not. Blurring it into a soft cloud of color, tuned to match the
+     surrounding tones almost exactly, is what actually makes the seam disappear. A slow
+     drift keeps it from feeling static without ever registering as a "shape". */
+  .hero-wave { position: absolute; top: -55px; left: 0; right: 0; height: 100px; overflow: hidden; pointer-events: none; z-index: 1; }
+  .hero-wave svg { position: absolute; left: -10%; top: -20%; width: 220%; height: 140%; filter: blur(26px); }
+  .hero-wave-back { animation: waveDrift 34s linear infinite; opacity: .35; }
+  .hero-wave-front { animation: waveDriftReverse 22s linear infinite; }
+  @keyframes waveDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes waveDriftReverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  @media (prefers-reduced-motion: reduce) { .hero-wave-back, .hero-wave-front { animation: none; } }
+  @media (max-width: 700px) {
+    .hero { display: block; padding: 0 0 40px; min-height: 0; }
+  }
+
+  /* Desktop: video fills the whole hero, absolutely positioned per design spec.
+     Mobile: the video becomes a contained media block that flows above the text,
+     cropped (object-fit: cover) and faded into the background so nothing feels cut off. */
+  .hero-media { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  @media (max-width: 700px) {
+    .hero-media { position: relative; height: 52vh; min-height: 280px; overflow: hidden; }
+  }
+
+  .hero-video-bg {
+    position: absolute; top: 0; right: -20%; width: 99%; height: auto;
+    pointer-events: none; z-index: 0; object-fit: contain;
+    /* Keep the globe's natural white/grey finish untouched — no color filter. Its contrast
+       comes from the footage's own dark-to-light gradient, not from tinting or the page bg. */
+    /* The video is a rectangle with a hard edge — this was the real "barrier": no matter how
+       well the surrounding colors matched, the footage's own crisp bottom border always read
+       as a seam. Fading it out with a mask lets it dissolve into the section instead of stopping dead. */
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 96%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 96%);
+  }
+  @media (max-width: 700px) {
+    .hero-video-bg { top: 0; left: -12%; right: auto; width: 119%; height: 100%; object-fit: cover; }
+  }
+
+  .hero-media-fade { display: none; }
+  @media (max-width: 700px) {
+    .hero-media-fade {
+      display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; z-index: 1;
+      background: linear-gradient(180deg, rgba(var(--dps-hero-bg-rgb),0) 0%, var(--dps-hero-bg) 88%);
+    }
+  }
+
+  /* Fixed px stops, not %: the text column caps at 720px, so this covers exactly that
+     column on any screen width and clears fully well before the globe's usual position —
+     a scrim that lingers translucent over the globe is what was dulling it. */
+  .hero-scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, var(--dps-hero-bg) 0px, var(--dps-hero-bg) 780px, rgba(var(--dps-hero-bg-rgb),.4) 880px, rgba(var(--dps-hero-bg-rgb),0) 1000px);
+  }
+  @media (max-width: 700px) { .hero-scrim { display: none; } }
+
+  /* Sits in FRONT of the video (unlike the video's own internal mask, which fades relative
+     to the VIDEO's height) so the bottom of the hero always ends in a clean gradient no
+     matter how tall the video renders on a given screen — on short/wide viewports the video
+     can be taller than the hero box itself, and hero's own overflow:hidden was chopping it
+     off before its internal fade ever kicked in. This guarantees the fade regardless. */
+  .hero-bottom-fade {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 130px; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(var(--dps-hero-bg-rgb),0) 0%, var(--dps-hero-bg) 45%, #F6FAFB 100%);
+  }
+
+  .hero-cursor-glow {
+    position: absolute; width: 460px; height: 460px; left: 0; top: 0;
+    border-radius: 50%; z-index: 1; pointer-events: none; opacity: 0;
+    background: radial-gradient(circle, rgba(1,155,153,.20), rgba(1,155,153,0) 70%);
+    transform: translate(-50%, -50%);
+    transition: opacity .4s var(--ease);
+  }
+  @media (max-width: 1023px) { .hero-cursor-glow { display: none; } }
+
+  .hero-inner { position: relative; z-index: 2; max-width: 720px; }
+  @media (max-width: 700px) { .hero-inner { margin-top: 24px; } }
+
+  .hero-heading {
+    font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+    color: var(--text-primary); line-height: 0.98; letter-spacing: 0.01em;
+    font-size: clamp(32px, 6.2vw, 66px);
+    margin-bottom: var(--space-6);
+  }
+  .stair-line { display: block; }
+  .stair-line.indent { margin-left: min(120px, 16vw); }
+  .stair-line.accent { color: var(--dps-teal-500); }
+  .word-wrap { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; }
+  .word { display: inline-block; opacity: 0; transform: translateY(100%); transition: opacity .6s var(--ease), transform .7s var(--ease-elastic); }
+  .hero-heading.is-visible .word, .split-title.is-visible .word { opacity: 1; transform: translateY(0); }
+
+  .hero .lead { max-width: 56ch; margin-bottom: var(--space-4); }
+  .hero-credibility { color: var(--text-secondary); font-size: 15px; margin-bottom: var(--space-6); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .hero-secondary-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+
+  /* ---------- Reveal helpers: word-split titles & mask wipe ---------- */
+  .split-title .word { transform: translateY(60%); }
+
+  .mask-reveal { position: relative; overflow: hidden; }
+  .mask-reveal::after {
+    content: ""; position: absolute; inset: 0; z-index: 2;
+    background: var(--dps-blue-700);
+    transform-origin: right; transform: scaleX(1);
+    transition: transform 1s var(--ease-wipe);
+  }
+  .mask-reveal.is-visible::after { transform: scaleX(0); }
+
+  /* ---------- Magnetic buttons ---------- */
+  .btn-primary, .btn-accent { transition: background var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform .35s var(--ease-elastic); }
+
+  /* ---------- Prova social ---------- */
+  /* 10 logos ao todo (7 + 3 novos) — colunas escolhidas pra dividir 10 sem sobrar
+     vão vazio na última linha: 2 no mobile (5 linhas cheias) e 5 a partir de 640px
+     (2 linhas cheias). 3 ou 4 colunas deixariam uma linha final incompleta (o
+     problema que motivou o ajuste). */
+  .logos-row {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+  @media (min-width: 640px) { .logos-row { grid-template-columns: repeat(5, 1fr); } }
+  .logo-slot {
+    display: flex; align-items: center; justify-content: center;
+    height: 88px; background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+    color: var(--text-secondary); font-size: 13px; font-weight: 500; text-align: center; padding: var(--space-4);
+    transition: box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
+  }
+  .logo-slot:hover { box-shadow: var(--shadow-sm); border-color: var(--dps-mist); }
+  .logo-slot img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+  .stats-row { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+  @media (min-width: 768px) { .stats-row { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ---------- Problema ---------- */
+  /* Reestruturada para seguir o mesmo padrão do resto do site: section-head (eyebrow +
+     h2 + texto de abertura) em cima, depois um bloco de conteúdo em largura total
+     embaixo — igual a "Como funciona" (section-head → cards-grid) ou "Resultados"
+     (section-head → cards-grid). A versão anterior era duas colunas lado a lado (texto
+     | foto+lista); como o texto é bem mais curto que foto+lista juntos, sobrava um vão
+     vazio grande na coluna de texto. Banner de foto em largura total + pain-list virando
+     grid de cards resolve isso sem precisar de decoração pra disfarçar. */
+  /* O título fica preso em --container-narrow (760px) igual toda outra seção do site —
+     é o padrão certo pra leitura. Mas numa tela larga isso deixa um vão vazio entre o
+     texto e a borda direita do container, sem nada acontecendo ali (diferente do banner
+     de foto e do grid de cards logo abaixo, que já ocupam a largura toda). Em vez de
+     inventar decoração nova, reaproveita o mesmo canvas de partículas conectadas que já
+     roda atrás do CTA final — mesmo efeito, mesmo custo (só anima com a seção visível,
+     desliga com reduced-motion), só que aqui ele aparece nos vãos porque o resto do
+     conteúdo (cards, foto) já cobre o canvas por cima. */
+  .problem-section { position: relative; overflow: hidden; }
+  .problem-section .container { position: relative; z-index: 1; }
+  .eyebrow-tri { width: 11px; height: 11px; margin-right: var(--space-2); vertical-align: middle; }
+  .problem-intro { margin-top: var(--space-5); }
+  .problem-intro p { margin-bottom: var(--space-4); }
+  .problem-photo-card {
+    position: relative; overflow: hidden; border-radius: var(--radius-lg);
+    aspect-ratio: 16 / 9; margin-bottom: var(--space-6);
+  }
+  @media (max-width: 639px) { .problem-photo-card { aspect-ratio: 4 / 3; } }
+  .problem-bg-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 30%;
+    opacity: 0; transition: opacity 1.6s var(--ease);
+  }
+  .problem-bg-img.is-active { opacity: 1; }
+  .problem-photo-card::after {
+    content: ""; position: absolute; inset: auto 0 0 0; height: 45%;
+    background: linear-gradient(180deg, rgba(10,58,78,0) 0%, rgba(10,58,78,.75) 100%);
+    pointer-events: none;
+  }
+  .problem-photo-caption {
+    position: absolute; left: var(--space-4); right: var(--space-4); bottom: var(--space-4);
+    color: #fff; font-size: 13px; font-weight: 500;
+  }
+  .pain-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-8); }
+  @media (min-width: 640px) { .pain-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .pain-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); } }
+  .pain-item {
+    display: flex; gap: var(--space-3); align-items: flex-start;
+    background: var(--dps-blue-700);
+    border-radius: var(--radius-md); padding: var(--space-5);
+  }
+  .pain-item svg { flex-shrink: 0; width: 22px; height: 22px; color: var(--dps-teal-200); margin-top: 2px; }
+  .pain-item span { color: #fff; font-size: 15px; }
+  .turn-line {
+    padding: var(--space-6);
+    border-left: 3px solid var(--dps-teal-200);
+    background: var(--dps-blue-700);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+  .turn-line p { font-family: var(--font-display); font-weight: 600; color: #fff; font-size: 20px; max-width: none; }
+  @media (prefers-reduced-motion: reduce) { .problem-bg-img { transition: none; } }
+
+  /* ---------- Solução / passos ---------- */
+  .step-eyebrow-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+  .step-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%; background: var(--dps-blue-700); color: #fff;
+    font-family: var(--font-display); font-weight: 700; font-size: 14px; flex-shrink: 0;
+    position: relative; z-index: 1; transition: background var(--duration-slow) var(--ease), transform var(--duration-base) var(--ease-elastic);
+  }
+  .step-label { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dps-teal-700); }
+  .step-block { margin-bottom: var(--space-9); }
+  .step-block:last-child { margin-bottom: 0; }
+  .step-block-head { max-width: var(--container-narrow); margin-bottom: var(--space-6); }
+  .step-block-head h3 { margin-top: 4px; }
+  .step-block-head .lead { margin-top: var(--space-3); }
+
+  .cards-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .cards-grid-4 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .cards-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .cards-grid-4 { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+
+  .solution-card-cta { margin-top: var(--space-5); }
+
+  .combine-block {
+    background: var(--dps-blue-700); border-radius: var(--radius-lg); padding: 48px 32px;
+    color: #fff; text-align: center; max-width: var(--container-narrow); margin: 0 auto;
+  }
+  @media (min-width: 1024px) { .combine-block { padding: 64px; } }
+  .combine-block p { color: var(--dps-mist); margin: 0 auto var(--space-6); font-size: 18px; }
+
+  /* ---------- Como começar ---------- */
+  .start-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-9); }
+  @media (min-width: 1024px) { .start-layout { grid-template-columns: 0.9fr 1.1fr; } }
+  .start-steps { display: flex; flex-direction: column; gap: var(--space-6); position: relative; }
+  .start-steps-line, .start-steps-progress { position: absolute; left: 17px; top: 18px; bottom: 18px; width: 2px; z-index: 0; }
+  .start-steps-line { background: var(--border); }
+  .start-steps-progress { background: var(--dps-teal-500); height: 0%; bottom: auto; transition: height .15s linear; }
+  .start-step { display: flex; gap: var(--space-4); }
+  .start-step.is-active .step-number { background: var(--dps-teal-500); transform: scale(1.08); }
+  .start-step h3 { margin-bottom: var(--space-2); }
+  .start-form-wrap {
+    background: var(--dps-tint); border-radius: var(--radius-lg); padding: 24px;
+  }
+  @media (min-width: 1024px) { .start-form-wrap { padding: 40px; } }
+  .form-row-2 { display: grid; grid-template-columns: 1fr; gap: 0 var(--space-4); }
+  @media (min-width: 640px) { .form-row-2 { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- Para imobiliárias ---------- */
+  /* Referência do cliente: nada de card escuro por trás — a peça logo+citação flutua
+     direto sobre o fundo claro da seção (.section-tint), igual a como ela já nasceu
+     no arquivo de design. align-items:center replica o padrão já usado em
+     .about-layout (vídeo x texto): a coluna da direita fica centralizada na altura
+     da coluna de texto, em vez de esticar/colar no topo. */
+  .realtor-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
+  @media (min-width: 1024px) { .realtor-layout { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .realtor-bullets { display: flex; flex-direction: column; gap: var(--space-4); margin: var(--space-6) 0; }
+  .realtor-bullet { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .realtor-bullet svg { flex-shrink: 0; width: 20px; height: 20px; color: var(--dps-teal-700); margin-top: 3px; }
+  .realtor-visual { display: flex; justify-content: center; }
+  /* Peça única (logo + citação já compostas por design, media-fonte/dps-logomarca-
+     quote-composta.png), extraída com fundo transparente — o mesmo recorte que já
+     existia, mas agora sem caixa/cartão em volta, pousando direto sobre o fundo
+     claro da seção, igual à referência enviada. .mask-reveal reusa a mesma cortina
+     de revelação já usada no vídeo de "Sobre a DPS" (about-video-wrap), então o
+     "aparecer" desta peça segue o mesmo padrão de animação do restante do site.
+     A citação e a legenda continuam existindo como texto de verdade
+     (.visually-hidden) pra leitor de tela, já que na imagem elas são só pixel. */
+  .realtor-visual-media { position: relative; overflow: hidden; width: 100%; max-width: 480px; }
+  .realtor-logo-bg { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+
+  /* ---------- Resultados ---------- */
+  /* Trocado de "case com métrica" ([X]% fictício) para "portfólio real": os cases pediam
+     números de performance que nenhum material da DPS confirma — preencher com número
+     chutado é o tipo de coisa que vira problema se um cliente perguntar de onde saiu.
+     O que existe de verdade são empreendimentos com nome, incorporadora e foto reais
+     (media-fonte/PRESS_DPS.pdf) — prova social em formato "portfólio", não "case".
+     .case-card perde o padding padrão de .card pra a foto ir de ponta a ponta (o
+     border-radius + overflow:hidden de .card já cuidam de arredondar os cantos da
+     imagem); o texto volta a ter respiro dentro de .case-card-body. */
+  /* aspect-ratio 1/1 (quadrado): as fotos de origem são bem verticais (~0.8:1, fachada
+     de torre inteira) — usar essa proporção direto na moldura do card (4/5, quase igual
+     à foto) deixava o card alto e estreito demais no grid de 3 colunas; mesmo sem
+     nenhuma distorção real (object-fit:cover nunca estica pixel, só recorta), a
+     moldura tão vertical passava a sensação de "esticado". Quadrado encurta a moldura
+     — object-fit:cover corta uma fatia do topo/base de cada prédio (recorte, não
+     esticamento) e centraliza no meio da fachada, que é a parte mais reconhecível.
+     IMPORTANTE — causa raiz do "esticado" que se repetiu por várias rodadas: o atributo
+     HTML height="N" de cada <img> é mapeado pelo stylesheet do navegador para uma
+     altura CSS EM PIXELS (não para aspect-ratio). aspect-ratio só entra em ação pra
+     calcular uma dimensão que esteja "auto" — com width:100% E height:1080px (vindo do
+     atributo) já definidos, as duas dimensões ficam "cheias" e aspect-ratio nunca é
+     consultado, então a moldura vira width:100% contra uma altura fixa em pixel sem
+     nenhuma relação com a largura real do card. Precisa de height:auto aqui pra abrir
+     espaço pro aspect-ratio calcular a altura de verdade — sem isso, qualquer valor de
+     aspect-ratio (4/3, 4/5, 1/1...) é só decoração, nunca chega a valer. */
+  .case-card { display: flex; flex-direction: column; padding: 0; }
+  .case-card-photo { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+  .case-card-body { padding: 20px 24px 24px; }
+  .case-card-body .badge { margin-bottom: var(--space-4); }
+
+  /* ---------- Segmentos (marquee) ---------- */
+  .segments-band { background: var(--dps-blue-900); padding: 56px 0; overflow: hidden; }
+  .segments-band .eyebrow { color: var(--dps-teal-200); }
+  .segments-band h2 { color: #fff; margin-bottom: var(--space-8); }
+  .marquee { overflow: hidden; position: relative; padding: var(--space-5) 0; border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+  .marquee-track {
+    display: flex; width: max-content; gap: 48px; animation: scroll-marquee 28s linear infinite;
+  }
+  .marquee-track span { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--dps-mist); white-space: nowrap; }
+  @keyframes scroll-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .segments-note { margin-top: var(--space-6); color: var(--dps-mist); font-size: 15px; }
+
+  /* ---------- Sobre / Pilares ---------- */
+  .about-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-9); }
+  @media (min-width: 1024px) { .about-layout { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .about-photo { border-radius: var(--radius-xl); width: 100%; height: auto; }
+  .about-video-wrap {
+    position: relative; border-radius: var(--radius-xl); overflow: hidden;
+    aspect-ratio: 4 / 3; box-shadow: var(--shadow-lg);
+  }
+  .about-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-video-tint { position: absolute; inset: 0; background: var(--dps-teal-500); mix-blend-mode: hue; pointer-events: none; z-index: 1; }
+  /* "Sobre a DPS" e "Nossa equipe" (a seção logo em seguida no HTML) têm o mesmo fundo
+     claro/plano — sem stats reais pra preencher o rodapé de #sobre, o padding-bottom
+     padrão de section (96px) + o padding-top da próxima (mais 96px) deixava ~192px de
+     vão morto entre elas. Reduzindo os dois lados dessa junção específica pra uma
+     margem só (não zero — zero grudava o último parágrafo direto no título de baixo,
+     sem respiro nenhum), as duas leem como um fluxo contínuo — "quem somos" emendando
+     em "quem faz acontecer" — sem mexer no espaçamento-padrão que o resto do site usa
+     entre seções. */
+  #sobre { padding-bottom: var(--space-6); }
+  #sobre + section { padding-top: var(--space-6); }
+
+  /* Nossa equipe + Pilares foram duas seções empilhadas, cada uma com section-head +
+     .pillars-grid (3 colunas ≥768px). Unidas numa seção só, split em duas metades —
+     cada metade já ocupa só ~50% do container, então 3 cards lado a lado dentro dela
+     ficariam espremidos mesmo em telas largas (a media query de .pillars-grid reagia
+     à largura da viewport, não à da metade). Por isso os cards de cada lado agora
+     empilham em coluna única sempre (.team-pillars-cards), independente do breakpoint. */
+  .team-pillars-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-9); }
+  @media (min-width: 860px) {
+    .team-pillars-layout { grid-template-columns: 1fr 1fr; gap: var(--space-9); align-items: start; }
+    .team-pillars-col + .team-pillars-col { padding-left: var(--space-8); border-left: 1px solid var(--border-subtle); }
+  }
+  .team-pillars-cards { display: flex; flex-direction: column; gap: 16px; }
+  /* Bordas menos arredondadas que o .card padrão do site (--radius-lg, 12px) — pedido
+     específico pra esta seção, não uma mudança global no token de radius do card. */
+  .team-pillars-cards .card { border-radius: var(--radius-sm); }
+  .pillar-icon {
+    width: 48px; height: 48px; border-radius: var(--radius-sm); background: rgba(1,155,153,.12);
+    display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4);
+  }
+  .pillar-icon svg { width: 24px; height: 24px; color: var(--dps-teal-700); }
+
+  /* ---------- Depoimentos ---------- */
+  /* Cards "deal in" like a stack being fanned out, staggered per card */
+  .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .testimonials-grid .card-testimonial {
+    transform: translateY(50px) rotate(-3deg) scale(.92);
+    transition: opacity .6s var(--ease), transform .7s var(--ease-elastic);
+  }
+  .testimonials-grid .card-testimonial:nth-child(2n) { transform: translateY(50px) rotate(3deg) scale(.92); }
+  .testimonials-grid .card-testimonial.is-visible { transform: translateY(0) rotate(0) scale(1); }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: var(--container-narrow); }
+  .faq-item { border-bottom: 1px solid var(--border-subtle); }
+  .faq-item:first-child { border-top: 1px solid var(--border-subtle); }
+  .faq-question {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    background: none; border: none; text-align: left; padding: 24px 0; min-height: 44px;
+  }
+  .faq-question h3 { font-size: 18px; }
+  .faq-question .icon-plus {
+    flex-shrink: 0; width: 20px; height: 20px; position: relative; color: var(--dps-teal-700);
+    transition: transform var(--duration-base) var(--ease);
+  }
+  .faq-question .icon-plus::before, .faq-question .icon-plus::after {
+    content: ""; position: absolute; background: currentColor; border-radius: 2px;
+  }
+  .faq-question .icon-plus::before { top: 9px; left: 0; width: 20px; height: 2px; }
+  .faq-question .icon-plus::after { top: 0; left: 9px; width: 2px; height: 20px; }
+  .faq-question[aria-expanded="true"] .icon-plus { transform: rotate(45deg); }
+  .faq-answer {
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-base) var(--ease);
+  }
+  .faq-answer.is-open { grid-template-rows: 1fr; }
+  .faq-answer-inner { overflow: hidden; }
+  .faq-answer p { padding-bottom: 24px; max-width: 62ch; }
+
+  /* ---------- CTA final ---------- */
+  .cta-final { background: var(--dps-gradient); color: #fff; text-align: center; }
+  .particles-canvas { position: absolute; inset: 0; z-index: 0; }
+  .cta-final h2 { color: #fff; max-width: var(--container-narrow); margin: 0 auto var(--space-5); }
+  .cta-final .lead { color: rgba(255,255,255,.88); max-width: var(--container-narrow); margin: 0 auto var(--space-7); }
+  .cta-final-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .cta-final .risk-line { color: rgba(255,255,255,.75); font-size: 14px; max-width: 50ch; margin: 0 auto; }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer { background: var(--dps-blue-900); color: var(--dps-mist); padding: var(--space-9) 0 var(--space-6); }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-7); margin-bottom: var(--space-8); }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .footer-grid { grid-template-columns: 1.3fr 1fr 1fr 1fr; } }
+  .footer-brand .logo { flex-direction: row; align-items: center; gap: 12px; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .footer-brand .logo-word { -webkit-text-fill-color: #fff; background: none; color: #fff; }
+  .footer-brand .logo-sub { color: var(--dps-mist); }
+  .footer-seal { width: 56px; height: 56px; border-radius: var(--radius-full); flex-shrink: 0; }
+  .footer-brand p { color: var(--dps-mist); font-size: 14px; margin-top: var(--space-4); max-width: 32ch; }
+  .footer-col h4 { color: #fff; font-size: 15px; margin-bottom: var(--space-4); }
+  .footer-col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+  .footer-col a { color: var(--dps-mist); text-decoration: none; font-size: 14px; min-height: 32px; display: inline-flex; align-items: center; }
+  .footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .footer-social { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .footer-social a {
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28);
+    display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none;
+  }
+  .footer-social a:hover { background: rgba(255,255,255,.12); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.15); padding-top: var(--space-6);
+    display: flex; flex-direction: column; gap: var(--space-4);
+  }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
+  .footer-legal { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); font-size: 13px; }
+  .footer-legal a { color: var(--dps-mist); text-decoration: none; }
+  .footer-legal a:hover { color: #fff; text-decoration: underline; }
+
+  /* ---------- Botão flutuante do WhatsApp ---------- */
+  /* z-index 90: abaixo da barra de progresso/nav (101/100) e do cursor customizado
+     (9999), mas acima de qualquer conteúdo normal da página — sempre visível por
+     cima, nunca por cima da navegação. */
+  .whatsapp-float {
+    position: fixed; right: 24px; bottom: 24px; z-index: 90;
+    width: 56px; height: 56px; border-radius: var(--radius-full);
+    background: var(--dps-blue-700); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease-elastic), box-shadow var(--duration-fast) var(--ease);
+  }
+  .whatsapp-float:hover, .whatsapp-float:focus-visible { background: var(--dps-blue-900); transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-md); }
+  @media (max-width: 639px) { .whatsapp-float { right: 16px; bottom: 16px; width: 52px; height: 52px; } }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--duration-slow) var(--ease), transform var(--duration-slow) var(--ease); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+    .marquee-track { animation: none; }
+    .word { opacity: 1 !important; transform: none !important; }
+    .mask-reveal::after { transform: scaleX(0) !important; }
+    .hero-cursor-glow { display: none !important; }
+    .hero-video-bg, .about-video, .realtor-logo-bg { transform: none !important; }
+    .whatsapp-float:hover, .whatsapp-float:focus-visible { transform: none !important; }
+  }
+
+  /* ---------- Página legal (Política de Privacidade / Termos / Cookies) ---------- */
+  /* Reaproveita os tokens, o reset e os componentes (header, footer, botões) do
+     index.html — só isso aqui embaixo é específico desta página. */
+  .legal-section { padding: var(--space-9) 0 var(--space-10); }
+  .legal-back {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    margin-bottom: var(--space-7);
+  }
+  .legal-back svg { width: 16px; height: 16px; }
+  .legal-updated { color: var(--text-secondary); font-size: 14px; margin: var(--space-3) 0 var(--space-7); }
+  .legal-intro { margin-bottom: var(--space-7); }
+  .legal-content h2 {
+    margin-top: var(--space-9); margin-bottom: var(--space-4);
+    padding-top: var(--space-7); border-top: 1px solid var(--border-subtle);
+    /* Header fica fixo por cima do conteúdo — sem isso, um link com âncora (ex.: o
+       "Política de Cookies" do rodapé, que aponta pra #cookies) rola o título pra
+       debaixo do header, escondido. scroll-margin-top é respeitado tanto por um
+       clique de âncora dentro da página quanto por carregar a página já com o
+       #hash na URL — ao contrário de tentar compensar isso rolando via JS, que
+       depende de timing e é frágil. */
+    scroll-margin-top: calc(var(--header-height) + var(--space-4));
+  }
+  .legal-content h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .legal-content p { max-width: none; margin-bottom: var(--space-4); color: var(--text-body); }
+  .legal-content ul { list-style: disc; padding-left: 1.4em; margin: var(--space-4) 0; display: flex; flex-direction: column; gap: var(--space-2); }
+  .legal-content li { color: var(--text-body); }
+  .legal-content strong { color: var(--text-primary); }
+  .legal-content a { color: var(--dps-blue-700); }
+  .legal-content a:hover { color: var(--dps-blue-900); }
+  /* h3 aparece só nesta página (Termos + Cookies): o documento tem um nível a mais
+     de hierarquia que a Política de Privacidade — h2 marca as duas grandes partes
+     ("Parte 1"/"Parte 2"), h3 marca cada seção numerada dentro de cada parte. Sem
+     borda própria (o h2 logo acima já demarca a virada de assunto); o espaçamento
+     e o tamanho de fonte menor (herdado do h3 global) já bastam pra diferenciar do h2. */
+  .legal-content h3 { margin-top: var(--space-8); margin-bottom: var(--space-3); scroll-margin-top: calc(var(--header-height) + var(--space-4)); }
+  .legal-content h2 + h3 { margin-top: var(--space-6); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+<div class="top-accent" aria-hidden="true"></div>
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="DPS Gestão Imobiliária, página inicial">
+        <span class="logo-word">DPS</span>
+        <span class="logo-sub">Gestão Imobiliária</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="index.html#solucoes">Soluções</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="index.html#para-imobiliarias">Para imobiliárias</a>
+        <a href="index.html#resultados">Resultados</a>
+        <a href="index.html#sobre">Sobre a DPS</a>
+      </nav>
+
+      <a href="index.html#comece-agora" class="btn btn-primary nav-cta">Falar com a DPS</a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu de navegação">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Navegação móvel">
+      <a href="index.html#solucoes">Soluções</a>
+      <a href="index.html#como-funciona">Como funciona</a>
+      <a href="index.html#para-imobiliarias">Para imobiliárias</a>
+      <a href="index.html#resultados">Resultados</a>
+      <a href="index.html#sobre">Sobre a DPS</a>
+      <a href="index.html#comece-agora" class="btn btn-primary btn-block">Falar com a DPS</a>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+  <section class="legal-section">
+    <div class="container container-narrow">
+      <a href="index.html" class="legal-back btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Voltar para a página inicial
+      </a>
+
+      <div class="reveal">
+        <h1>Termos de Uso e Política de Cookies</h1>
+        <p class="legal-updated">Última atualização: 1 de setembro de 2026</p>
+      </div>
+
+      <div class="legal-content">
+        <h2>Parte 1: Termos de Uso</h2>
+
+        <h3>1. Aceitação dos termos</h3>
+        <p>Ao acessar e utilizar este site, você concorda com os termos e condições descritos a seguir. Se você não concorda com algum destes termos, recomendamos que não utilize o site.</p>
+
+        <h3>2. Sobre este site</h3>
+        <p>Este site é um canal institucional da <strong>DPS Gestão Imobiliária</strong>, com o objetivo de apresentar nossos serviços de gestão de parcerias entre incorporadoras e imobiliárias, e permitir que interessados entrem em contato conosco por meio do formulário disponível na página.</p>
+        <p>O conteúdo aqui publicado tem caráter informativo e comercial, e não constitui, por si só, uma proposta comercial vinculante ou contrato: propostas formais são enviadas individualmente após contato direto com nossa equipe.</p>
+
+        <h3>3. Uso permitido</h3>
+        <p>Você concorda em utilizar este site apenas para finalidades lícitas, e em não:</p>
+        <ul>
+          <li>Utilizar o site de forma que possa danificar, sobrecarregar ou prejudicar seu funcionamento</li>
+          <li>Tentar obter acesso não autorizado a qualquer parte do site, sistema ou rede relacionada</li>
+          <li>Reproduzir, copiar ou redistribuir o conteúdo do site sem autorização prévia por escrito</li>
+          <li>Utilizar o formulário de contato para enviar informações falsas, enganosas ou com finalidade diversa da prevista (contato comercial legítimo)</li>
+        </ul>
+
+        <h3>4. Propriedade intelectual</h3>
+        <p>Todo o conteúdo deste site, incluindo textos, imagens, vídeos, logotipos, identidade visual e código, é de propriedade da DPS Gestão Imobiliária ou licenciado para seu uso, e está protegido pela legislação de direitos autorais e propriedade industrial aplicável. Nenhuma parte deste conteúdo pode ser reproduzida ou utilizada comercialmente sem autorização prévia.</p>
+        <p>Logotipos de incorporadoras e imobiliárias parceiras exibidos neste site pertencem às respectivas empresas e são utilizados com o propósito de demonstrar relações de parceria existentes.</p>
+
+        <h3>5. Links para sites de terceiros</h3>
+        <p>Este site pode conter links para redes sociais e outros serviços de terceiros (como Instagram e WhatsApp). Não temos controle sobre o conteúdo ou as práticas de privacidade desses serviços, e recomendamos a leitura dos termos e políticas próprios de cada um antes de utilizá-los.</p>
+
+        <h3>6. Limitação de responsabilidade</h3>
+        <p>Empenhamo-nos para manter as informações deste site atualizadas e precisas, mas não garantimos que o conteúdo esteja livre de erros ou que o site funcione de forma ininterrupta. A DPS não se responsabiliza por danos decorrentes do uso ou da impossibilidade de uso deste site, dentro dos limites permitidos pela legislação aplicável.</p>
+
+        <h3>7. Alterações destes termos</h3>
+        <p>Podemos atualizar estes Termos de Uso periodicamente, para refletir mudanças em nossas práticas, no site ou por exigência legal. A data da última atualização estará sempre indicada no início deste documento.</p>
+
+        <h3>8. Legislação aplicável e foro</h3>
+        <p>Estes Termos de Uso são regidos pela legislação brasileira. Fica eleito o foro da comarca de Campinas-SP para dirimir quaisquer controvérsias decorrentes destes termos, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
+
+        <h2 id="cookies">Parte 2: Política de Cookies</h2>
+
+        <h3>9. O que são cookies</h3>
+        <p>Cookies são pequenos arquivos de texto armazenados no seu dispositivo quando você visita um site. Eles ajudam o site a lembrar suas preferências e a funcionar corretamente.</p>
+
+        <h3>10. Quais cookies este site utiliza</h3>
+        <p>Este site utiliza, no momento, apenas recursos técnicos essenciais ao funcionamento da página (como o comportamento de rolagem e exibição de elementos), que não dependem de cookies de rastreamento ou identificação pessoal.</p>
+        <p>[Atualizar esta seção caso o site passe a usar, no futuro, cookies de análise de audiência (como Google Analytics), pixels de redes sociais (como Meta/Instagram) ou cookies de marketing: nesses casos, é necessário listar cada categoria, sua finalidade, e oferecer um mecanismo de consentimento/recusa (banner de cookies), conforme exigido pela LGPD.]</p>
+
+        <h3>11. Como gerenciar cookies no seu navegador</h3>
+        <p>Mesmo com o uso mínimo de cookies deste site, você pode configurar seu navegador para bloquear ou excluir cookies a qualquer momento, nas configurações de privacidade do navegador utilizado (Chrome, Safari, Firefox, Edge, entre outros). Note que bloquear certos cookies técnicos pode afetar o funcionamento de algumas páginas.</p>
+
+        <h3>12. Alterações nesta política</h3>
+        <p>Podemos atualizar esta Política de Cookies periodicamente, especialmente se novas tecnologias de rastreamento forem adicionadas ao site no futuro. A data no início deste documento sempre refletirá a versão mais recente.</p>
+
+        <h2>Fale conosco</h2>
+        <p>Se tiver dúvidas sobre estes Termos de Uso ou sobre a Política de Cookies, entre em contato:</p>
+        <ul>
+          <li><strong>E-mail:</strong> dps.imob@gmail.com</li>
+          <li><strong>WhatsApp:</strong> (19) 98211-0505</li>
+          <li><strong>Endereço:</strong> Campinas-SP</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" aria-label="DPS Gestão Imobiliária, página inicial">
+          <img class="footer-seal" loading="lazy" alt="Selo Parceria DPS" src="images/logo-parceria-dps.jpg" width="56" height="56">
+          <span class="logo-text">
+            <span class="logo-word">DPS</span>
+            <span class="logo-sub">Gestão Imobiliária</span>
+          </span>
+        </a>
+        <p>Conectamos sua visão à força do mercado, com a excelência e integridade que sua obra merece.</p>
+        <div class="footer-social" style="margin-top: var(--space-6)">
+          <a href="https://instagram.com/dps.parceria" target="_blank" rel="noopener" aria-label="DPS no Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+          <a href="https://wa.me/5519982110505" target="_blank" rel="noopener" aria-label="Falar com a DPS no WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>DPS</h4>
+        <ul>
+          <li><a href="index.html#sobre">Sobre nós</a></li>
+          <li><a href="index.html#solucoes">Soluções</a></li>
+          <li><a href="index.html#resultados">Cases</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Trabalhe conosco</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Para incorporadoras</h4>
+        <ul>
+          <li><a href="index.html#solucoes">Gestão contínua</a></li>
+          <li><a href="index.html#solucoes">Lançamentos</a></li>
+          <li><a href="index.html#solucoes">Escoamento de estoque</a></li>
+          <li><a href="index.html#solucoes">Expansão regional</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Para imobiliárias</h4>
+        <ul>
+          <li><a href="index.html#para-imobiliarias">Entrar na rede</a></li>
+          <li><a href="index.html#para-imobiliarias">Portfólio de empreendimentos</a></li>
+          <li><a href="index.html#para-imobiliarias">Treinamentos</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-col" style="margin-bottom: var(--space-8)">
+      <h4>Contato</h4>
+      <p class="body-small" style="color: var(--dps-mist)">(19) 98211-0505 · dps.imob@gmail.com · Campinas-SP</p>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="caption">© 2026 DPS Gestão Imobiliária</p>
+      <div class="footer-legal">
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+        <a href="termos-de-uso.html#cookies">Política de Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<a class="whatsapp-float" href="https://wa.me/5519982110505" target="_blank" rel="noopener" aria-label="Falar com a DPS no WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+</a>
+
+<script>
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Header shadow on scroll (mesmo comportamento do index.html, sem a parte
+  // "transparente sobre o hero" — esta página não tem hero escuro, o header
+  // já nasce na cor sólida padrão).
+  var header = document.getElementById('site-header');
+  var onScroll = function () {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu toggle
+  var navToggle = document.getElementById('nav-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  navToggle.addEventListener('click', function () {
+    var expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!expanded));
+    navToggle.setAttribute('aria-label', expanded ? 'Abrir menu de navegação' : 'Fechar menu de navegação');
+    mobileMenu.classList.toggle('is-open', !expanded);
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Abrir menu de navegação');
+      mobileMenu.classList.remove('is-open');
+    });
+  });
+
+  // Scroll reveal — mesmo observer do index.html
+  var revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { observer.observe(el); });
+  }
+
+  // Rolar até a âncora quando a página já carrega com uma (ex.: o link "Política de
+  // Cookies" do rodapé, que manda pra termos-de-uso.html#cookies). scroll-margin-top
+  // no CSS já cuida de descontar a altura do header fixo — só precisa garantir que
+  // o scrollIntoView roda depois da página assentar (fontes, layout), daí o load em
+  // vez do parse do script.
+  if (location.hash) {
+    var hashTarget = document.querySelector(location.hash);
+    if (hashTarget) {
+      var scrollToHash = function () {
+        hashTarget.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      };
+      if (document.readyState === 'complete') {
+        scrollToHash();
+      } else {
+        window.addEventListener('load', scrollToHash);
+      }
+    }
+  }
+})();
+</script>
+</body>
+</html>

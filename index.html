@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DPS Gestão Imobiliária — Gestão de parcerias entre incorporadoras e imobiliárias</title>
+<title>DPS Gestão Imobiliária: Gestão de parcerias entre incorporadoras e imobiliárias</title>
 <meta name="description" content="A DPS conecta incorporadoras e imobiliárias e faz a gestão completa dessa parceria: curadoria de parceiros, treinamento de corretores e acompanhamento de resultados. Fale com um especialista.">
 <meta property="og:title" content="Parceria é venda. A DPS faz a parceria funcionar.">
 <meta property="og:description" content="Gestão de parcerias imobiliárias de ponta a ponta, para o seu estoque girar mais rápido.">
@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#0A3A4E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <style>
   /* ---------- Reset ---------- */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -167,6 +167,7 @@
   .section-dark { background: var(--dps-blue-900); color: var(--text-inverse); }
   .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--text-inverse); }
   .section-dark p, .section-dark .lead { color: var(--dps-mist); }
+  .section-dark .eyebrow { color: var(--dps-teal-200); } /* teal-700 dá só 2,8:1 sobre blue-900 — teal-200 é 7,08:1 AAA */
 
   .section-head { max-width: var(--container-narrow); margin-bottom: var(--space-8); }
   .section-head h2 { margin-top: var(--space-4); }
@@ -277,6 +278,40 @@
   .testimonial-avatar { width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; }
   .testimonial-name { font-family: var(--font-body); font-weight: 600; color: var(--dps-blue-900); font-size: 15px; }
   .testimonial-role { font-size: 14px; color: var(--text-secondary); }
+
+  /* Depoimentos em vídeo — mesmo card .card-testimonial (fundo tint, radius-lg), só troca
+     a citação em texto por uma miniatura 9:16 (proporção real do Shorts, sem as barras
+     desfocadas que o YouTube usa pra preencher o quadro 16:9 da thumbnail). Facade
+     leve: só carrega o iframe do YouTube quando alguém realmente clica no play — os
+     três vídeos não pesam nada na carga inicial da página. */
+  /* Sem isso, uma coluna única (mobile e tablet) deixa o card esticar até a largura
+     cheia do grid — numa proporção 9:16 isso vira uma miniatura absurdamente alta.
+     Trava numa largura confortável e centraliza; no desktop de 3 colunas o valor já
+     bate perto da largura natural da célula, então não muda quase nada lá. */
+  .video-testimonial { padding: 0; overflow: hidden; max-width: 320px; width: 100%; margin: 0 auto; }
+  .video-testimonial-media {
+    position: relative; aspect-ratio: 9 / 16; background: var(--dps-blue-900);
+    cursor: pointer; overflow: hidden;
+  }
+  .video-testimonial-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-testimonial-media iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video-testimonial-media::after {
+    content: ""; position: absolute; inset: auto 0 0 0; height: 40%; pointer-events: none;
+    background: linear-gradient(180deg, rgba(10,58,78,0) 0%, rgba(10,58,78,.7) 100%);
+  }
+  .video-testimonial-media.is-playing::after { display: none; }
+  .video-testimonial-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 56px; height: 56px; border-radius: 50%; background: #fff;
+    display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg);
+    transition: transform var(--duration-fast) var(--ease);
+  }
+  .video-testimonial-play svg { width: 20px; height: 20px; color: var(--dps-teal-700); margin-left: 3px; }
+  .video-testimonial-media:hover .video-testimonial-play { transform: translate(-50%, -50%) scale(1.08); }
+  .video-testimonial-badge {
+    position: absolute; left: var(--space-4); bottom: var(--space-4); z-index: 1;
+  }
+  .video-testimonial-caption { padding: var(--space-5) var(--space-6) var(--space-6); }
 
   /* ---------- Forms ---------- */
   .form-group { margin-bottom: 20px; }
@@ -534,37 +569,85 @@
   .btn-primary, .btn-accent { transition: background var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform .35s var(--ease-elastic); }
 
   /* ---------- Prova social ---------- */
+  /* 10 logos ao todo (7 + 3 novos) — colunas escolhidas pra dividir 10 sem sobrar
+     vão vazio na última linha: 2 no mobile (5 linhas cheias) e 5 a partir de 640px
+     (2 linhas cheias). 3 ou 4 colunas deixariam uma linha final incompleta (o
+     problema que motivou o ajuste). */
   .logos-row {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4);
     margin: var(--space-8) 0;
   }
-  @media (min-width: 640px) { .logos-row { grid-template-columns: repeat(3, 1fr); } }
-  @media (min-width: 1024px) { .logos-row { grid-template-columns: repeat(6, 1fr); } }
+  @media (min-width: 640px) { .logos-row { grid-template-columns: repeat(5, 1fr); } }
   .logo-slot {
     display: flex; align-items: center; justify-content: center;
-    height: 72px; background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
-    color: var(--text-secondary); font-size: 13px; font-weight: 500; text-align: center; padding: 8px;
+    height: 88px; background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+    color: var(--text-secondary); font-size: 13px; font-weight: 500; text-align: center; padding: var(--space-4);
+    transition: box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
   }
+  .logo-slot:hover { box-shadow: var(--shadow-sm); border-color: var(--dps-mist); }
+  .logo-slot img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
   .stats-row { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
   @media (min-width: 768px) { .stats-row { grid-template-columns: repeat(3, 1fr); } }
 
   /* ---------- Problema ---------- */
-  .problem-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
-  @media (min-width: 1024px) { .problem-grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-9); } }
-  .problem-text p { margin-bottom: var(--space-5); }
-  .pain-list { display: flex; flex-direction: column; gap: var(--space-4); }
+  /* Reestruturada para seguir o mesmo padrão do resto do site: section-head (eyebrow +
+     h2 + texto de abertura) em cima, depois um bloco de conteúdo em largura total
+     embaixo — igual a "Como funciona" (section-head → cards-grid) ou "Resultados"
+     (section-head → cards-grid). A versão anterior era duas colunas lado a lado (texto
+     | foto+lista); como o texto é bem mais curto que foto+lista juntos, sobrava um vão
+     vazio grande na coluna de texto. Banner de foto em largura total + pain-list virando
+     grid de cards resolve isso sem precisar de decoração pra disfarçar. */
+  /* O título fica preso em --container-narrow (760px) igual toda outra seção do site —
+     é o padrão certo pra leitura. Mas numa tela larga isso deixa um vão vazio entre o
+     texto e a borda direita do container, sem nada acontecendo ali (diferente do banner
+     de foto e do grid de cards logo abaixo, que já ocupam a largura toda). Em vez de
+     inventar decoração nova, reaproveita o mesmo canvas de partículas conectadas que já
+     roda atrás do CTA final — mesmo efeito, mesmo custo (só anima com a seção visível,
+     desliga com reduced-motion), só que aqui ele aparece nos vãos porque o resto do
+     conteúdo (cards, foto) já cobre o canvas por cima. */
+  .problem-section { position: relative; overflow: hidden; }
+  .problem-section .container { position: relative; z-index: 1; }
+  .eyebrow-tri { width: 11px; height: 11px; margin-right: var(--space-2); vertical-align: middle; }
+  .problem-intro { margin-top: var(--space-5); }
+  .problem-intro p { margin-bottom: var(--space-4); }
+  .problem-photo-card {
+    position: relative; overflow: hidden; border-radius: var(--radius-lg);
+    aspect-ratio: 16 / 9; margin-bottom: var(--space-6);
+  }
+  @media (max-width: 639px) { .problem-photo-card { aspect-ratio: 4 / 3; } }
+  .problem-bg-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 30%;
+    opacity: 0; transition: opacity 1.6s var(--ease);
+  }
+  .problem-bg-img.is-active { opacity: 1; }
+  .problem-photo-card::after {
+    content: ""; position: absolute; inset: auto 0 0 0; height: 45%;
+    background: linear-gradient(180deg, rgba(10,58,78,0) 0%, rgba(10,58,78,.75) 100%);
+    pointer-events: none;
+  }
+  .problem-photo-caption {
+    position: absolute; left: var(--space-4); right: var(--space-4); bottom: var(--space-4);
+    color: #fff; font-size: 13px; font-weight: 500;
+  }
+  .pain-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-8); }
+  @media (min-width: 640px) { .pain-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .pain-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); } }
   .pain-item {
     display: flex; gap: var(--space-3); align-items: flex-start;
-    background: var(--dps-tint); border-radius: var(--radius-md); padding: var(--space-4);
+    background: var(--dps-blue-700);
+    border-radius: var(--radius-md); padding: var(--space-5);
   }
-  .pain-item svg { flex-shrink: 0; width: 22px; height: 22px; color: var(--dps-teal-700); margin-top: 2px; }
-  .pain-item span { color: var(--text-body); font-size: 15px; }
+  .pain-item svg { flex-shrink: 0; width: 22px; height: 22px; color: var(--dps-teal-200); margin-top: 2px; }
+  .pain-item span { color: #fff; font-size: 15px; }
   .turn-line {
-    margin-top: var(--space-8); padding: var(--space-6);
-    border-left: 3px solid var(--dps-teal-500); background: var(--dps-tint);
+    padding: var(--space-6);
+    border-left: 3px solid var(--dps-teal-200);
+    background: var(--dps-blue-700);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
   }
-  .turn-line p { font-family: var(--font-display); font-weight: 600; color: var(--text-primary); font-size: 20px; max-width: none; }
+  .turn-line p { font-family: var(--font-display); font-weight: 600; color: #fff; font-size: 20px; max-width: none; }
+  @media (prefers-reduced-motion: reduce) { .problem-bg-img { transition: none; } }
 
   /* ---------- Solução / passos ---------- */
   .step-eyebrow-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
@@ -615,29 +698,57 @@
   @media (min-width: 640px) { .form-row-2 { grid-template-columns: 1fr 1fr; } }
 
   /* ---------- Para imobiliárias ---------- */
-  .realtor-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-8); align-items: start; }
-  @media (min-width: 1024px) { .realtor-layout { grid-template-columns: 1fr 1fr; } }
+  /* Referência do cliente: nada de card escuro por trás — a peça logo+citação flutua
+     direto sobre o fundo claro da seção (.section-tint), igual a como ela já nasceu
+     no arquivo de design. align-items:center replica o padrão já usado em
+     .about-layout (vídeo x texto): a coluna da direita fica centralizada na altura
+     da coluna de texto, em vez de esticar/colar no topo. */
+  .realtor-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
+  @media (min-width: 1024px) { .realtor-layout { grid-template-columns: 1fr 1fr; align-items: center; } }
   .realtor-bullets { display: flex; flex-direction: column; gap: var(--space-4); margin: var(--space-6) 0; }
   .realtor-bullet { display: flex; gap: var(--space-3); align-items: flex-start; }
   .realtor-bullet svg { flex-shrink: 0; width: 20px; height: 20px; color: var(--dps-teal-700); margin-top: 3px; }
-  .realtor-visual {
-    background: var(--dps-blue-900); border-radius: var(--radius-xl); min-height: 280px;
-    position: relative; overflow: hidden; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; text-align: center; gap: var(--space-4); padding: 40px;
-  }
-  .realtor-visual .tri { position: absolute; opacity: .5; pointer-events: none; }
-  .realtor-visual p { color: var(--dps-mist); font-size: 14px; position: relative; z-index: 1; }
-  .realtor-seal {
-    width: 140px; height: 140px; border-radius: var(--radius-full); position: relative; z-index: 1;
-    box-shadow: var(--shadow-lg); background: #fff;
-  }
+  .realtor-visual { display: flex; justify-content: center; }
+  /* Peça única (logo + citação já compostas por design, media-fonte/dps-logomarca-
+     quote-composta.png), extraída com fundo transparente — o mesmo recorte que já
+     existia, mas agora sem caixa/cartão em volta, pousando direto sobre o fundo
+     claro da seção, igual à referência enviada. .mask-reveal reusa a mesma cortina
+     de revelação já usada no vídeo de "Sobre a DPS" (about-video-wrap), então o
+     "aparecer" desta peça segue o mesmo padrão de animação do restante do site.
+     A citação e a legenda continuam existindo como texto de verdade
+     (.visually-hidden) pra leitor de tela, já que na imagem elas são só pixel. */
+  .realtor-visual-media { position: relative; overflow: hidden; width: 100%; max-width: 480px; }
+  .realtor-logo-bg { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
 
   /* ---------- Resultados ---------- */
-  .case-card { display: flex; flex-direction: column; }
-  .case-card .badge { margin-bottom: var(--space-5); align-self: flex-start; }
-  .case-stat { display: flex; gap: var(--space-6); margin-bottom: var(--space-4); flex-wrap: wrap; }
-  .case-stat div .stat-number { font-size: 32px; margin-bottom: 0; }
-  .case-stat div span.stat-label { font-size: 13px; color: var(--text-secondary); }
+  /* Trocado de "case com métrica" ([X]% fictício) para "portfólio real": os cases pediam
+     números de performance que nenhum material da DPS confirma — preencher com número
+     chutado é o tipo de coisa que vira problema se um cliente perguntar de onde saiu.
+     O que existe de verdade são empreendimentos com nome, incorporadora e foto reais
+     (media-fonte/PRESS_DPS.pdf) — prova social em formato "portfólio", não "case".
+     .case-card perde o padding padrão de .card pra a foto ir de ponta a ponta (o
+     border-radius + overflow:hidden de .card já cuidam de arredondar os cantos da
+     imagem); o texto volta a ter respiro dentro de .case-card-body. */
+  /* aspect-ratio 1/1 (quadrado): as fotos de origem são bem verticais (~0.8:1, fachada
+     de torre inteira) — usar essa proporção direto na moldura do card (4/5, quase igual
+     à foto) deixava o card alto e estreito demais no grid de 3 colunas; mesmo sem
+     nenhuma distorção real (object-fit:cover nunca estica pixel, só recorta), a
+     moldura tão vertical passava a sensação de "esticado". Quadrado encurta a moldura
+     — object-fit:cover corta uma fatia do topo/base de cada prédio (recorte, não
+     esticamento) e centraliza no meio da fachada, que é a parte mais reconhecível.
+     IMPORTANTE — causa raiz do "esticado" que se repetiu por várias rodadas: o atributo
+     HTML height="N" de cada <img> é mapeado pelo stylesheet do navegador para uma
+     altura CSS EM PIXELS (não para aspect-ratio). aspect-ratio só entra em ação pra
+     calcular uma dimensão que esteja "auto" — com width:100% E height:1080px (vindo do
+     atributo) já definidos, as duas dimensões ficam "cheias" e aspect-ratio nunca é
+     consultado, então a moldura vira width:100% contra uma altura fixa em pixel sem
+     nenhuma relação com a largura real do card. Precisa de height:auto aqui pra abrir
+     espaço pro aspect-ratio calcular a altura de verdade — sem isso, qualquer valor de
+     aspect-ratio (4/3, 4/5, 1/1...) é só decoração, nunca chega a valer. */
+  .case-card { display: flex; flex-direction: column; padding: 0; }
+  .case-card-photo { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+  .case-card-body { padding: 20px 24px 24px; }
+  .case-card-body .badge { margin-bottom: var(--space-4); }
 
   /* ---------- Segmentos (marquee) ---------- */
   .segments-band { background: var(--dps-blue-900); padding: 56px 0; overflow: hidden; }
@@ -661,12 +772,34 @@
   }
   .about-video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .about-video-tint { position: absolute; inset: 0; background: var(--dps-teal-500); mix-blend-mode: hue; pointer-events: none; z-index: 1; }
-  .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-7); }
+  /* "Sobre a DPS" e "Nossa equipe" (a seção logo em seguida no HTML) têm o mesmo fundo
+     claro/plano — sem stats reais pra preencher o rodapé de #sobre, o padding-bottom
+     padrão de section (96px) + o padding-top da próxima (mais 96px) deixava ~192px de
+     vão morto entre elas. Reduzindo os dois lados dessa junção específica pra uma
+     margem só (não zero — zero grudava o último parágrafo direto no título de baixo,
+     sem respiro nenhum), as duas leem como um fluxo contínuo — "quem somos" emendando
+     em "quem faz acontecer" — sem mexer no espaçamento-padrão que o resto do site usa
+     entre seções. */
+  #sobre { padding-bottom: var(--space-6); }
+  #sobre + section { padding-top: var(--space-6); }
 
-  .pillars-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  @media (min-width: 768px) { .pillars-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  /* Nossa equipe + Pilares foram duas seções empilhadas, cada uma com section-head +
+     .pillars-grid (3 colunas ≥768px). Unidas numa seção só, split em duas metades —
+     cada metade já ocupa só ~50% do container, então 3 cards lado a lado dentro dela
+     ficariam espremidos mesmo em telas largas (a media query de .pillars-grid reagia
+     à largura da viewport, não à da metade). Por isso os cards de cada lado agora
+     empilham em coluna única sempre (.team-pillars-cards), independente do breakpoint. */
+  .team-pillars-layout { display: grid; grid-template-columns: 1fr; gap: var(--space-9); }
+  @media (min-width: 860px) {
+    .team-pillars-layout { grid-template-columns: 1fr 1fr; gap: var(--space-9); align-items: start; }
+    .team-pillars-col + .team-pillars-col { padding-left: var(--space-8); border-left: 1px solid var(--border-subtle); }
+  }
+  .team-pillars-cards { display: flex; flex-direction: column; gap: 16px; }
+  /* Bordas menos arredondadas que o .card padrão do site (--radius-lg, 12px) — pedido
+     específico pra esta seção, não uma mudança global no token de radius do card. */
+  .team-pillars-cards .card { border-radius: var(--radius-sm); }
   .pillar-icon {
-    width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(1,155,153,.12);
+    width: 48px; height: 48px; border-radius: var(--radius-sm); background: rgba(1,155,153,.12);
     display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4);
   }
   .pillar-icon svg { width: 24px; height: 24px; color: var(--dps-teal-700); }
@@ -746,6 +879,21 @@
   .footer-legal a { color: var(--dps-mist); text-decoration: none; }
   .footer-legal a:hover { color: #fff; text-decoration: underline; }
 
+  /* ---------- Botão flutuante do WhatsApp ---------- */
+  /* z-index 90: abaixo da barra de progresso/nav (101/100) e do cursor customizado
+     (9999), mas acima de qualquer conteúdo normal da página — sempre visível por
+     cima, nunca por cima da navegação. */
+  .whatsapp-float {
+    position: fixed; right: 24px; bottom: 24px; z-index: 90;
+    width: 56px; height: 56px; border-radius: var(--radius-full);
+    background: var(--dps-blue-700); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease-elastic), box-shadow var(--duration-fast) var(--ease);
+  }
+  .whatsapp-float:hover, .whatsapp-float:focus-visible { background: var(--dps-blue-900); transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-md); }
+  @media (max-width: 639px) { .whatsapp-float { right: 16px; bottom: 16px; width: 52px; height: 52px; } }
+
   /* ---------- Scroll reveal ---------- */
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--duration-slow) var(--ease), transform var(--duration-slow) var(--ease); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -758,7 +906,8 @@
     .word { opacity: 1 !important; transform: none !important; }
     .mask-reveal::after { transform: scaleX(0) !important; }
     .hero-cursor-glow { display: none !important; }
-    .hero-video-bg, .about-video { transform: none !important; }
+    .hero-video-bg, .about-video, .realtor-logo-bg { transform: none !important; }
+    .whatsapp-float:hover, .whatsapp-float:focus-visible { transform: none !important; }
   }
 </style>
 </head>
@@ -827,8 +976,8 @@
           <span class="stair-line indent"><span class="word-wrap"><span class="word">transforma</span></span></span>
           <span class="stair-line indent accent"><span class="word-wrap"><span class="word">venda</span></span></span>
         </h1>
-        <p class="lead">Conectamos incorporadoras e imobiliárias e cuidamos dessa relação de ponta a ponta — do primeiro contato ao contrato assinado.</p>
-        <p class="hero-credibility">Desde [ano] girando estoque de incorporadoras em [cidade/região].</p>
+        <p class="lead">Conectamos incorporadoras e imobiliárias e cuidamos dessa relação de ponta a ponta, do primeiro contato ao contrato assinado.</p>
+        <p class="hero-credibility">Girando estoque de incorporadoras nas praças de São Paulo e Paraná.</p>
         <div class="hero-actions">
           <a href="#comece-agora" class="btn btn-primary">Quero uma proposta de parceria</a>
           <a href="#como-funciona" class="btn btn-secondary">Ver como a gestão funciona</a>
@@ -851,28 +1000,32 @@
       </svg>
     </div>
     <div class="container">
-      <h2 id="social-proof-title" style="max-width:var(--container-narrow)">Incorporadoras e imobiliárias que trabalham com a DPS</h2>
+      <h2 id="social-proof-title" style="max-width:var(--container-narrow)">Parceiro(as) que trabalham com a DPS</h2>
 
       <div class="logos-row" role="list" aria-label="Logos de parceiros">
-        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
-        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
-        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
-        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
-        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
-        <div class="logo-slot" role="listitem">[Logo parceiro]</div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-stan.webp" alt="Stan Desenvolvimento Imobiliário" loading="lazy" width="200" height="138"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-helbor.webp" alt="Helbor" loading="lazy" width="200" height="41"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-azo.webp" alt="Azo Inc" loading="lazy" width="200" height="67"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-skaf.webp" alt="Skaf Urbanização e Participações" loading="lazy" width="200" height="71"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-fontoura.webp" alt="Fontoura Construção e Incorporação" loading="lazy" width="200" height="180"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-capital.webp" alt="Capital Empreendimentos e Participações" loading="lazy" width="200" height="85"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-ecoville.webp" alt="Jardim Ecoville Campo Mourão" loading="lazy" width="200" height="79"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-lopes.webp" alt="Lopes" loading="lazy" width="200" height="81"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-santaisabel.webp" alt="Reserva Santalsabel 3" loading="lazy" width="200" height="44"></div>
+        <div class="logo-slot" role="listitem"><img src="images/logo-parceiro-colinas.webp" alt="Colinas Home Club - Lorena" loading="lazy" width="200" height="201"></div>
       </div>
 
       <div class="stats-row">
         <div class="card reveal">
-          <span class="stat-number">[+X]</span>
+          <span class="stat-number" data-count-to="10" data-count-prefix="+">+10</span>
           <p class="body-small">incorporadoras parceiras</p>
         </div>
         <div class="card reveal">
-          <span class="stat-number">[+X]</span>
+          <span class="stat-number" data-count-to="500" data-count-prefix="+">+500</span>
           <p class="body-small">imobiliárias e corretores na rede</p>
         </div>
         <div class="card reveal">
-          <span class="stat-number">[R$ X]</span>
+          <span class="stat-number" data-count-to="100" data-count-prefix="+R$ " data-count-suffix="M">+R$ 100M</span>
           <p class="body-small">em VGV vendido pela rede</p>
         </div>
       </div>
@@ -880,42 +1033,73 @@
   </section>
 
   <!-- Problema -->
-  <section aria-labelledby="problem-title">
+  <section class="section-dark problem-section" aria-labelledby="problem-title">
+    <canvas class="particles-canvas" aria-hidden="true"></canvas>
     <div class="container">
-      <div class="problem-grid">
-        <div class="problem-text reveal">
-          <h2 id="problem-title">Parceria imobiliária não falha por falta de parceiro. Falha por falta de gestão.</h2>
-          <div style="margin-top: var(--space-6)">
-            <p>Você abre o empreendimento para dez imobiliárias. Três vendem. Duas somem depois do primeiro mês. As outras cinco atendem o seu cliente de um jeito que você nunca aprovaria — e você só descobre quando a reclamação chega.</p>
-            <p>Enquanto isso, alguém do seu time gasta a semana repassando tabela por WhatsApp, resolvendo conflito de comissão e tentando lembrar quem cadastrou qual cliente.</p>
-          </div>
-        </div>
-
-        <div class="reveal">
-          <ul class="pain-list">
-            <li class="pain-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span>Parceiro entra, some e ninguém acompanha</span>
-            </li>
-            <li class="pain-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span>Corretor vende o seu produto sem conhecer o seu produto</span>
-            </li>
-            <li class="pain-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span>Conflito de lead e disputa de comissão travando o fechamento</span>
-            </li>
-            <li class="pain-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span>Nenhuma visibilidade de quem está performando e quem não está</span>
-            </li>
-            <li class="pain-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span>Cada parceria funciona de um jeito, e nenhuma escala</span>
-            </li>
-          </ul>
+      <div class="section-head reveal">
+        <p class="eyebrow"><svg class="eyebrow-tri" viewBox="0 0 200 200" aria-hidden="true"><polygon points="100,10 190,180 10,180" fill="var(--dps-teal-500)"/></svg>O problema</p>
+        <h2 id="problem-title">Parceria imobiliária não falha por falta de parceiro. Falha por falta de gestão.</h2>
+        <div class="problem-intro">
+          <p>Você abre o empreendimento para dez imobiliárias. Três vendem. Duas somem depois do primeiro mês. As outras cinco atendem o seu cliente de um jeito que você nunca aprovaria, e você só descobre quando a reclamação chega.</p>
+          <p>Enquanto isso, alguém do seu time gasta a semana repassando tabela por WhatsApp, resolvendo conflito de comissão e tentando lembrar quem cadastrou qual cliente.</p>
         </div>
       </div>
+
+      <div class="problem-photo-card reveal">
+        <img class="problem-bg-img is-active" loading="lazy" decoding="async" width="1920" height="1440"
+          alt="Equipe de corretores parceiros da DPS reunida em frente ao plantão de vendas do residencial Reserva Perfetto, comemorando o lançamento do empreendimento"
+          src="images/equipe-comemoracao-reserva-perfetto-1024w.webp"
+          srcset="images/equipe-comemoracao-reserva-perfetto-480w.webp 480w, images/equipe-comemoracao-reserva-perfetto-1024w.webp 1024w, images/equipe-comemoracao-reserva-perfetto-1920w.webp 1920w"
+          sizes="100vw">
+        <img class="problem-bg-img" aria-hidden="true" loading="lazy" decoding="async" width="1200" height="1600"
+          alt="Plantão de vendas da DPS montado em frente à torre em construção do Colinas Home Club, com bandeira e material da marca"
+          src="images/plantao-vendas-dps-colinas-home-club-1024w.webp"
+          srcset="images/plantao-vendas-dps-colinas-home-club-480w.webp 480w, images/plantao-vendas-dps-colinas-home-club-1024w.webp 1024w, images/plantao-vendas-dps-colinas-home-club-1920w.webp 1920w"
+          sizes="100vw">
+        <img class="problem-bg-img" aria-hidden="true" loading="lazy" decoding="async" width="1200" height="1600"
+          alt="Corretores parceiros atendendo clientes em mesas de negociação dentro do plantão de vendas do Colinas Home Club"
+          src="images/atendimento-plantao-vendas-colinas-1024w.webp"
+          srcset="images/atendimento-plantao-vendas-colinas-480w.webp 480w, images/atendimento-plantao-vendas-colinas-1024w.webp 1024w, images/atendimento-plantao-vendas-colinas-1920w.webp 1920w"
+          sizes="100vw">
+        <img class="problem-bg-img" aria-hidden="true" loading="lazy" decoding="async" width="1024" height="768"
+          alt="Corretores parceiros reunidos ao redor de uma maquete durante apresentação de treinamento sobre um novo empreendimento"
+          src="images/apresentacao-treinamento-corretores-1024w.webp"
+          srcset="images/apresentacao-treinamento-corretores-480w.webp 480w, images/apresentacao-treinamento-corretores-1024w.webp 1024w, images/apresentacao-treinamento-corretores-1920w.webp 1920w"
+          sizes="100vw">
+        <img class="problem-bg-img" aria-hidden="true" loading="lazy" decoding="async" width="960" height="1280"
+          alt="Equipe de corretores parceiros durante reunião de briefing e alinhamento em um plantão de vendas da DPS"
+          src="images/briefing-equipe-corretores-1024w.webp"
+          srcset="images/briefing-equipe-corretores-480w.webp 480w, images/briefing-equipe-corretores-1024w.webp 1024w, images/briefing-equipe-corretores-1920w.webp 1920w"
+          sizes="100vw">
+        <p class="problem-photo-caption">Bastidores reais de plantões, treinamentos e lançamentos da rede DPS</p>
+      </div>
+
+      <ul class="pain-grid">
+        <li class="pain-item reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Parceiro entra, some e ninguém acompanha</span>
+        </li>
+        <li class="pain-item reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Corretor vende o seu produto sem conhecer o seu produto</span>
+        </li>
+        <li class="pain-item reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Conflito de lead e disputa de comissão travando o fechamento</span>
+        </li>
+        <li class="pain-item reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Nenhuma visibilidade de quem está performando e quem não está</span>
+        </li>
+        <li class="pain-item reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Cada parceria funciona de um jeito, e nenhuma escala</span>
+        </li>
+        <li class="pain-item reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Sem contrato claro, comissão e prazo viram negociação a cada venda</span>
+        </li>
+      </ul>
 
       <div class="turn-line reveal">
         <p>A parceria é uma boa estratégia. O que quase ninguém faz é tratá-la como uma operação.</p>
@@ -950,7 +1134,7 @@
           </div>
           <div class="card card-bar reveal">
             <h3>Captação e curadoria de parceiros</h3>
-            <p>Não trazemos qualquer imobiliária. Selecionamos parceiros com perfil, região e carteira compatíveis com o seu produto — e recusamos os que não são.</p>
+            <p>Não trazemos qualquer imobiliária. Selecionamos parceiros com perfil, região e carteira compatíveis com o seu produto, e recusamos os que não são.</p>
             <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="card card-bar reveal">
@@ -970,7 +1154,7 @@
           </div>
           <div class="card card-bar reveal">
             <h3>Relacionamento e experiência do cliente</h3>
-            <p>O comprador não sabe quem é a imobiliária parceira — ele só vê a sua marca. Padronizamos o atendimento para que a experiência seja a mesma em qualquer ponta.</p>
+            <p>O comprador não sabe quem é a imobiliária parceira. Ele só vê a sua marca. Padronizamos o atendimento para que a experiência seja a mesma em qualquer ponta.</p>
             <a href="#comece-agora" class="btn-text solution-card-cta">Mais sobre essa solução <span class="arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -1014,7 +1198,7 @@
           <span class="step-label">Combine do jeito que o seu negócio precisa</span>
         </div>
         <div class="combine-block reveal">
-          <p>São <strong>[6]</strong> soluções aplicadas em <strong>[4]</strong> modelos de atuação. Na prática, a DPS monta o arranjo que faz sentido para o seu portfólio, a sua região e o seu momento — e ajusta quando o momento muda.</p>
+          <p>São <strong>6</strong> soluções aplicadas em <strong>4</strong> modelos de atuação. Na prática, a DPS monta o arranjo que faz sentido para o seu portfólio, a sua região e o seu momento, e ajusta quando o momento muda.</p>
           <a href="#comece-agora" class="btn btn-on-dark">Montar minha operação de parcerias</a>
         </div>
       </div>
@@ -1041,7 +1225,7 @@
               <span class="step-number">2</span>
               <div>
                 <h3>Receba uma ligação</h3>
-                <p class="body-small">Em até [X horas], um especialista da DPS entra em contato para agendar o diagnóstico da sua operação de parcerias.</p>
+                <p class="body-small">Em até 24 horas, um especialista da DPS entra em contato para agendar o diagnóstico da sua operação de parcerias.</p>
               </div>
             </div>
             <div class="start-step">
@@ -1104,7 +1288,7 @@
           <ul class="realtor-bullets">
             <li class="realtor-bullet">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Portfólio de incorporadoras [da região X] em um só lugar</span>
+              <span>Portfólio de incorporadoras de todo o estado de São Paulo em um só lugar</span>
             </li>
             <li class="realtor-bullet">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1116,7 +1300,7 @@
             </li>
             <li class="realtor-bullet">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Um ponto de contato para tirar dúvida — sem depender de quem responde primeiro no grupo</span>
+              <span>Um ponto de contato para tirar dúvida, sem depender de quem responde primeiro no grupo</span>
             </li>
           </ul>
 
@@ -1124,9 +1308,13 @@
         </div>
 
         <div class="realtor-visual reveal">
-          <svg class="tri" style="top:-40px; right:-40px; width:180px; height:180px" viewBox="0 0 200 200" aria-hidden="true"><polygon points="100,10 190,180 10,180" fill="var(--dps-teal-500)" opacity="0.25"/></svg>
-          <img class="realtor-seal" loading="lazy" alt="Selo Parceria DPS — Gestão Imobiliária" src="images/logo-parceria-dps.jpg" width="140" height="140">
-          <p>Rede DPS — imobiliárias e corretores parceiros</p>
+          <div class="realtor-visual-media mask-reveal">
+            <img class="realtor-logo-bg" loading="lazy" alt="" aria-hidden="true" src="images/dps-logomarca-quote.webp" width="772" height="612">
+          </div>
+          <blockquote class="visually-hidden">
+            <p>“O certo é certo, mesmo que ninguém o faça. O errado sempre será errado, mesmo que todos façam...”</p>
+          </blockquote>
+          <p class="visually-hidden">Rede DPS: imobiliárias e corretores parceiros</p>
         </div>
       </div>
     </div>
@@ -1137,36 +1325,82 @@
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Resultados</p>
-        <h2 id="results-title">Resultado de parceria bem gerida tem números</h2>
+        <h2 id="results-title">Empreendimentos que já passaram pela gestão da DPS</h2>
       </div>
 
       <div class="cards-grid">
         <article class="card card-bar case-card reveal">
-          <span class="badge badge-neutral">[Case 1 — Incorporadora]</span>
-          <div class="case-stat">
-            <div><span class="stat-number">[X]%</span><span class="stat-label">aumento na velocidade de vendas</span></div>
+          <img class="case-card-photo" loading="lazy" decoding="async" width="1080" height="1080"
+            alt="Fachada do edifício Veter Cambuí, empreendimento residencial da incorporadora Azo Inc em Campinas-SP"
+            src="images/portfolio-veter-cambui-1024w.webp"
+            srcset="images/portfolio-veter-cambui-480w.webp 480w, images/portfolio-veter-cambui-1024w.webp 1024w, images/portfolio-veter-cambui-1920w.webp 1920w"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+          <div class="case-card-body">
+            <span class="badge badge-neutral">SP</span>
+            <h3>Veter Cambuí</h3>
+            <p class="body-small">Incorporadora: Azo Inc</p>
           </div>
-          <p class="body-small">[X] unidades vendidas em [X] meses.</p>
-          <p class="body-small">[Uma frase sobre o desafio e o que a DPS fez]</p>
         </article>
         <article class="card card-bar case-card reveal">
-          <span class="badge badge-neutral">[Case 2 — Escoamento de estoque]</span>
-          <div class="case-stat">
-            <div><span class="stat-number">[X]</span><span class="stat-label">unidades remanescentes vendidas em [X] meses</span></div>
+          <img class="case-card-photo" loading="lazy" decoding="async" width="1080" height="1080"
+            alt="Fachada do Portinari Prime Residence, empreendimento da incorporadora Fontoura em Indaiatuba-SP"
+            src="images/portfolio-portinari-prime-residence-1024w.webp"
+            srcset="images/portfolio-portinari-prime-residence-480w.webp 480w, images/portfolio-portinari-prime-residence-1024w.webp 1024w, images/portfolio-portinari-prime-residence-1920w.webp 1920w"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+          <div class="case-card-body">
+            <span class="badge badge-neutral">SP</span>
+            <h3>Portinari Prime Residence</h3>
+            <p class="body-small">Incorporadora: Fontoura</p>
           </div>
-          <p class="body-small">[Uma frase sobre o desafio e o que a DPS fez]</p>
         </article>
         <article class="card card-bar case-card reveal">
-          <span class="badge badge-neutral">[Case 3 — Lançamento]</span>
-          <div class="case-stat">
-            <div><span class="stat-number">[X]%</span><span class="stat-label">do VGV vendido no primeiro fim de semana</span></div>
+          <img class="case-card-photo" loading="lazy" decoding="async" width="1080" height="1080"
+            alt="Portaria de entrada do loteamento Jardim Nova Europa, empreendimento da incorporadora Skaf"
+            src="images/portfolio-jardim-nova-europa-1024w.webp"
+            srcset="images/portfolio-jardim-nova-europa-480w.webp 480w, images/portfolio-jardim-nova-europa-1024w.webp 1024w, images/portfolio-jardim-nova-europa-1920w.webp 1920w"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+          <div class="case-card-body">
+            <span class="badge badge-neutral">SP</span>
+            <h3>Jardim Nova Europa</h3>
+            <p class="body-small">Incorporadora: Skaf</p>
           </div>
-          <p class="body-small">[Uma frase sobre o desafio e o que a DPS fez]</p>
         </article>
-      </div>
-
-      <div style="text-align:center; margin-top: var(--space-8)">
-        <a href="#resultados" class="btn btn-secondary">Ver todos os cases</a>
+        <article class="card card-bar case-card reveal">
+          <img class="case-card-photo" loading="lazy" decoding="async" width="1080" height="1080"
+            alt="Fachada do My Way Guanabara, empreendimento da incorporadora Helbor"
+            src="images/portfolio-my-way-guanabara-1024w.webp"
+            srcset="images/portfolio-my-way-guanabara-480w.webp 480w, images/portfolio-my-way-guanabara-1024w.webp 1024w, images/portfolio-my-way-guanabara-1920w.webp 1920w"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+          <div class="case-card-body">
+            <span class="badge badge-neutral">SP</span>
+            <h3>My Way Guanabara</h3>
+            <p class="body-small">Incorporadora: Helbor</p>
+          </div>
+        </article>
+        <article class="card card-bar case-card reveal">
+          <img class="case-card-photo" loading="lazy" decoding="async" width="1080" height="1080"
+            alt="Fachada das torres do Reserva Perfetto, empreendimento da incorporadora Stan"
+            src="images/portfolio-reserva-perfetto-1024w.webp"
+            srcset="images/portfolio-reserva-perfetto-480w.webp 480w, images/portfolio-reserva-perfetto-1024w.webp 1024w, images/portfolio-reserva-perfetto-1920w.webp 1920w"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+          <div class="case-card-body">
+            <span class="badge badge-neutral">SP</span>
+            <h3>Reserva Perfetto</h3>
+            <p class="body-small">Incorporadora: Stan</p>
+          </div>
+        </article>
+        <article class="card card-bar case-card reveal">
+          <img class="case-card-photo" loading="lazy" decoding="async" width="1080" height="1080"
+            alt="Portaria de entrada do Residencial Reserva dos Lagos, empreendimento da incorporadora Capital"
+            src="images/portfolio-reserva-dos-lagos-1024w.webp"
+            srcset="images/portfolio-reserva-dos-lagos-480w.webp 480w, images/portfolio-reserva-dos-lagos-1024w.webp 1024w, images/portfolio-reserva-dos-lagos-1920w.webp 1920w"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+          <div class="case-card-body">
+            <span class="badge badge-neutral">SP</span>
+            <h3>Residencial Reserva dos Lagos</h3>
+            <p class="body-small">Incorporadora: Capital</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -1190,7 +1424,7 @@
     </ul>
 
     <div class="container">
-      <p class="segments-note">[Presença em X cidades / X estados]</p>
+      <p class="segments-note">Presença nos estados de São Paulo e Paraná, com sede em Campinas-SP.</p>
     </div>
   </section>
 
@@ -1215,45 +1449,77 @@
             <p>Nossa base é a excelência em tudo que fazemos: da gestão de parcerias ao treinamento contínuo da equipe. Colocamos as necessidades e os objetivos dos nossos clientes em primeiro lugar e adaptamos nossos serviços para garantir satisfação e sucesso.</p>
           </div>
 
-          <div class="about-stats">
-            <div><span class="stat-number" style="font-size:32px">[+X]</span><p class="body-small">anos de mercado</p></div>
-            <div><span class="stat-number" style="font-size:32px">[+X]</span><p class="body-small">incorporadoras atendidas</p></div>
-            <div><span class="stat-number" style="font-size:32px">[+X]</span><p class="body-small">corretores treinados</p></div>
-            <div><span class="stat-number" style="font-size:32px">[R$ X]</span><p class="body-small">em VGV movimentado</p></div>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Pilares -->
-  <section class="section-tint" aria-labelledby="pillars-title">
+  <!-- Nossa Equipe + Pilares — antes duas seções empilhadas, unidas numa só a pedido
+       do usuário: mesma leitura ("quem faz acontecer" / "o que sustenta a parceria"),
+       agora lado a lado em duas metades em vez de uma embaixo da outra. -->
+  <section aria-label="Nossa equipe e os pilares da parceria DPS">
     <div class="container">
-      <div class="section-head reveal">
-        <h2 id="pillars-title">O que sustenta cada parceria da DPS</h2>
-      </div>
+      <div class="team-pillars-layout">
+        <div class="team-pillars-col">
+          <div class="section-head reveal">
+            <p class="eyebrow">Nossa equipe</p>
+            <h2 id="team-title">Quem faz a parceria funcionar todos os dias</h2>
+          </div>
 
-      <div class="pillars-grid">
-        <div class="card reveal">
-          <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+          <div class="team-pillars-cards">
+            <div class="card reveal">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>
+              </div>
+              <h3>Experiência comercial</h3>
+              <p>Nossa equipe é composta por profissionais altamente capacitados e experientes, constantemente treinando e se especializando nos produtos.</p>
+            </div>
+            <div class="card reveal">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+              </div>
+              <h3>Integridade e transparência</h3>
+              <p>Operamos com transparência e ética em todas as interações, construindo relações sólidas baseadas na confiança.</p>
+            </div>
+            <div class="card reveal">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <h3>Dedicação e comprometimento</h3>
+              <p>Cada membro da equipe é dedicado aos seus respectivos produtos de atuação, trazendo um alto grau de comprometimento para atender às necessidades dos nossos clientes.</p>
+            </div>
           </div>
-          <h3>Excelência</h3>
-          <p>Padrão de entrega definido, acompanhado e cobrado. Da primeira reunião ao pós-venda.</p>
         </div>
-        <div class="card reveal">
-          <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+
+        <div class="team-pillars-col">
+          <div class="section-head reveal">
+            <p class="eyebrow">Pilares</p>
+            <h2 id="pillars-title">O que sustenta cada parceria da DPS</h2>
           </div>
-          <h3>Foco no cliente</h3>
-          <p>Adaptamos o modelo ao seu produto e ao seu momento. Não temos um pacote único para vender.</p>
-        </div>
-        <div class="card reveal">
-          <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+
+          <div class="team-pillars-cards">
+            <div class="card reveal">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+              </div>
+              <h3>Excelência</h3>
+              <p>Padrão de entrega definido, acompanhado e cobrado. Da primeira reunião ao pós-venda.</p>
+            </div>
+            <div class="card reveal">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+              </div>
+              <h3>Foco no cliente</h3>
+              <p>Adaptamos o modelo ao seu produto e ao seu momento. Não temos um pacote único para vender.</p>
+            </div>
+            <div class="card reveal">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              </div>
+              <h3>Treinamento contínuo</h3>
+              <p>Time e rede em formação permanente. Corretor bem treinado é a diferença entre apresentar um imóvel e vender um imóvel.</p>
+            </div>
           </div>
-          <h3>Treinamento contínuo</h3>
-          <p>Time e rede em formação permanente. Corretor bem treinado é a diferença entre apresentar um imóvel e vender um imóvel.</p>
         </div>
       </div>
     </div>
@@ -1263,50 +1529,50 @@
   <section aria-labelledby="testimonials-title">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Depoimentos</p>
-        <h2 id="testimonials-title">O que dizem as incorporadoras que trabalham com a DPS</h2>
+        <p class="eyebrow">Depoimentos em vídeo</p>
+        <h2 id="testimonials-title">O que dizem as imobiliárias parceiras da rede DPS</h2>
       </div>
 
       <div class="testimonials-grid">
-        <figure class="card-testimonial reveal">
-          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>
-            <p>[Depoimento 1 — nome, cargo, incorporadora, foto]</p>
-          </blockquote>
-          <figcaption class="testimonial-person">
-            <img class="testimonial-avatar" loading="lazy" alt="Foto de perfil do autor do depoimento 1" src="images/placeholder-avatar.svg">
-            <div>
-              <p class="testimonial-name">[Nome]</p>
-              <p class="testimonial-role">[Cargo, incorporadora]</p>
-            </div>
+        <figure class="card-testimonial video-testimonial reveal">
+          <div class="video-testimonial-media" data-yt-id="k-jmKE3HwQ4" role="button" tabindex="0" aria-label="Assistir depoimento em vídeo da Decolar Imóveis, Hortolândia, no YouTube">
+            <img class="video-testimonial-thumb" loading="lazy" alt="Corretora da Decolar Imóveis gravando depoimento em vídeo sobre a parceria com a DPS" src="images/depoimento-decolar-imoveis-hortolandia.webp" width="405" height="720">
+            <span class="badge badge-on-dark video-testimonial-badge">Depoimento em vídeo</span>
+            <span class="video-testimonial-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </div>
+          <figcaption class="video-testimonial-caption">
+            <p class="testimonial-name">Decolar Imóveis</p>
+            <p class="testimonial-role">Hortolândia, imobiliária parceira</p>
           </figcaption>
         </figure>
 
-        <figure class="card-testimonial reveal">
-          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>
-            <p>[Depoimento 2 — nome, cargo, incorporadora, foto]</p>
-          </blockquote>
-          <figcaption class="testimonial-person">
-            <img class="testimonial-avatar" loading="lazy" alt="Foto de perfil do autor do depoimento 2" src="images/placeholder-avatar.svg">
-            <div>
-              <p class="testimonial-name">[Nome]</p>
-              <p class="testimonial-role">[Cargo, incorporadora]</p>
-            </div>
+        <figure class="card-testimonial video-testimonial reveal">
+          <div class="video-testimonial-media" data-yt-id="mDRmID6X2Rw" role="button" tabindex="0" aria-label="Assistir depoimento em vídeo da Pulze Imóveis, Campinas, no YouTube">
+            <img class="video-testimonial-thumb" loading="lazy" alt="Corretora da Pulze Imóveis gravando depoimento em vídeo sobre a parceria com a DPS" src="images/depoimento-pulze-imoveis-campinas.webp" width="405" height="720">
+            <span class="badge badge-on-dark video-testimonial-badge">Depoimento em vídeo</span>
+            <span class="video-testimonial-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </div>
+          <figcaption class="video-testimonial-caption">
+            <p class="testimonial-name">Pulze Imóveis</p>
+            <p class="testimonial-role">Campinas, imobiliária parceira</p>
           </figcaption>
         </figure>
 
-        <figure class="card-testimonial reveal">
-          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>
-            <p>[Depoimento 3 — nome, cargo, imobiliária parceira, foto]</p>
-          </blockquote>
-          <figcaption class="testimonial-person">
-            <img class="testimonial-avatar" loading="lazy" alt="Foto de perfil do autor do depoimento 3" src="images/placeholder-avatar.svg">
-            <div>
-              <p class="testimonial-name">[Nome]</p>
-              <p class="testimonial-role">[Cargo, imobiliária parceira]</p>
-            </div>
+        <figure class="card-testimonial video-testimonial reveal">
+          <div class="video-testimonial-media" data-yt-id="nwMWOn7hcH4" role="button" tabindex="0" aria-label="Assistir depoimento em vídeo da VLAR Imóveis, Campinas, no YouTube">
+            <img class="video-testimonial-thumb" loading="lazy" alt="Corretor da VLAR Imóveis gravando depoimento em vídeo sobre a parceria com a DPS" src="images/depoimento-vlar-imoveis-campinas.webp" width="405" height="720">
+            <span class="badge badge-on-dark video-testimonial-badge">Depoimento em vídeo</span>
+            <span class="video-testimonial-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </div>
+          <figcaption class="video-testimonial-caption">
+            <p class="testimonial-name">VLAR Imóveis</p>
+            <p class="testimonial-role">Campinas, imobiliária parceira</p>
           </figcaption>
         </figure>
       </div>
@@ -1328,7 +1594,7 @@
             <span class="icon-plus" aria-hidden="true"></span>
           </button>
           <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
-            <div class="faq-answer-inner"><p>Não. Não concorremos com as imobiliárias — nós as organizamos. A DPS faz a gestão da relação entre a sua incorporadora e a rede de parceiros que vende o seu produto: seleção, treinamento, regras, acompanhamento e reporte.</p></div>
+            <div class="faq-answer-inner"><p>Não. Não concorremos com as imobiliárias: nós as organizamos. A DPS faz a gestão da relação entre a sua incorporadora e a rede de parceiros que vende o seu produto: seleção, treinamento, regras, acompanhamento e reporte.</p></div>
           </div>
         </div>
 
@@ -1358,7 +1624,7 @@
             <span class="icon-plus" aria-hidden="true"></span>
           </button>
           <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
-            <div class="faq-answer-inner"><p>Faz — e normalmente é aí que o ganho aparece mais rápido. Na maioria dos casos, as parcerias já existem, mas funcionam no improviso. Estruturar o que já está em pé costuma dar resultado antes de trazer parceiro novo.</p></div>
+            <div class="faq-answer-inner"><p>Faz, e normalmente é aí que o ganho aparece mais rápido. Na maioria dos casos, as parcerias já existem, mas funcionam no improviso. Estruturar o que já está em pé costuma dar resultado antes de trazer parceiro novo.</p></div>
           </div>
         </div>
 
@@ -1398,7 +1664,7 @@
             <span class="icon-plus" aria-hidden="true"></span>
           </button>
           <div class="faq-answer" id="faq-a8" role="region" aria-labelledby="faq-q8">
-            <div class="faq-answer-inner"><p>[Sim / Não — descrever critérios.]</p></div>
+            <div class="faq-answer-inner"><p>[Sim / Não, descrever critérios.]</p></div>
           </div>
         </div>
       </div>
@@ -1432,12 +1698,10 @@
             <span class="logo-sub">Gestão Imobiliária</span>
           </span>
         </a>
-        <p>Conectamos incorporadoras e imobiliárias e fazemos a gestão completa dessa parceria.</p>
+        <p>Conectamos sua visão à força do mercado, com a excelência e integridade que sua obra merece.</p>
         <div class="footer-social" style="margin-top: var(--space-6)">
-          <a href="#" aria-label="DPS no Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
-          <a href="#" aria-label="DPS no LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#" aria-label="DPS no YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.5 8.5s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5h0s-4.9 0-7.6.2c-.4 0-1.3.1-2.1 1-.6.7-.8 2.3-.8 2.3S1.3 10.4 1.3 12.3v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.3.2 7.3.2s4.9 0 7.6-.3c.4 0 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-1.9.2-3.8v-1.8c0-1.9-.2-3.8-.2-3.8z"/><polygon points="9.8 15.5 15.5 12.3 9.8 9 9.8 15.5" fill="currentColor"/></svg></a>
-          <a href="#" aria-label="Falar com a DPS no WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+          <a href="https://instagram.com/dps.parceria" target="_blank" rel="noopener" aria-label="DPS no Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+          <a href="https://wa.me/5519982110505" target="_blank" rel="noopener" aria-label="Falar com a DPS no WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
         </div>
       </div>
 
@@ -1474,19 +1738,27 @@
 
     <div class="footer-col" style="margin-bottom: var(--space-8)">
       <h4>Contato</h4>
-      <p class="body-small" style="color: var(--dps-mist)">[Telefone] · [E-mail] · [Endereço] · [CRECI]</p>
+      <p class="body-small" style="color: var(--dps-mist)">(19) 98211-0505 · dps.imob@gmail.com · Campinas-SP</p>
     </div>
 
     <div class="footer-bottom">
-      <p class="caption">© [ano] DPS Gestão Imobiliária</p>
+      <p class="caption">© 2026 DPS Gestão Imobiliária</p>
       <div class="footer-legal">
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
-        <a href="#">Política de Cookies</a>
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+        <a href="termos-de-uso.html#cookies">Política de Cookies</a>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- Botão flutuante do WhatsApp — mesmo link configurado no rodapé (footer-social),
+     acompanha o scroll (position:fixed) e usa o azul da paleta do projeto
+     (--dps-blue-700, a mesma cor do .btn-primary) em vez do verde padrão do
+     WhatsApp, pra ficar consistente com a marca DPS. -->
+<a class="whatsapp-float" href="https://wa.me/5519982110505" target="_blank" rel="noopener" aria-label="Falar com a DPS no WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+</a>
 
 <script>
 (function () {
@@ -1596,6 +1868,43 @@
     revealEls.forEach(function (el) { observer.observe(el); });
   }
 
+  // Stat count-up — conta de 0 até o valor real (data-count-to), uma vez, ao entrar na
+  // tela. Escopado só aos números já preenchidos (marcados com o atributo); os [X] que
+  // ainda são placeholder não têm data-count-to e ficam de fora, sem tentar animar um
+  // texto que não é número.
+  var countEls = document.querySelectorAll('[data-count-to]');
+  if (countEls.length) {
+    var runCount = function (el) {
+      var target = parseFloat(el.getAttribute('data-count-to'));
+      var prefix = el.getAttribute('data-count-prefix') || '';
+      var suffix = el.getAttribute('data-count-suffix') || '';
+      if (reduceMotion || isNaN(target)) { el.textContent = prefix + target + suffix; return; }
+      var duration = 1400;
+      var start = null;
+      var step = function (ts) {
+        if (start === null) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3); // ease-out cúbico — acelera e desacelera suave, sem ficar "nervoso"
+        el.textContent = prefix + Math.round(eased * target) + suffix;
+        if (progress < 1) window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
+    };
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      countEls.forEach(function (el) { runCount(el); });
+    } else {
+      var countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            runCount(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      countEls.forEach(function (el) { countObserver.observe(el); });
+    }
+  }
+
   // Word-split reveal for the hero staircase headline and section titles
   var wordDelay = function (container) {
     var words = container.querySelectorAll('.word');
@@ -1677,6 +1986,7 @@
   if (!reduceMotion) {
     var heroVideo = document.querySelector('.hero-video-bg');
     var aboutVideo = document.querySelector('.about-video');
+    var realtorLogo = document.querySelector('.realtor-logo-bg');
     var ticking = false;
     var updateParallax = function () {
       ticking = false;
@@ -1690,6 +2000,18 @@
         if (rect.bottom > 0 && rect.top < vh) {
           var centered = (rect.top + rect.height / 2 - vh / 2) / vh;
           aboutVideo.style.transform = 'translateY(' + (centered * -40) + 'px) scale(1.12)';
+        }
+      }
+      // Mesmo cálculo do about-video acima (distância até o centro da viewport), só
+      // que com um deslocamento bem mais discreto — aqui é uma peça de logo+citação
+      // flutuando sobre fundo claro, não um vídeo em card, então o efeito precisa
+      // ser sutil pra não brigar com a leitura do texto cursivo.
+      if (realtorLogo) {
+        var rlRect = realtorLogo.getBoundingClientRect();
+        var rlVh = window.innerHeight || document.documentElement.clientHeight;
+        if (rlRect.bottom > 0 && rlRect.top < rlVh) {
+          var rlCentered = (rlRect.top + rlRect.height / 2 - rlVh / 2) / rlVh;
+          realtorLogo.style.transform = 'translateY(' + (rlCentered * -26) + 'px)';
         }
       }
     };
@@ -1736,9 +2058,11 @@
     updateTimeline();
   }
 
-  // Connected-particles canvas behind the closing CTA — only animates while on screen
-  var particlesCanvas = document.querySelector('.particles-canvas');
-  if (particlesCanvas && !reduceMotion && 'requestAnimationFrame' in window) {
+  // Connected-particles canvas — behind the closing CTA and behind the "Problema" title
+  // (fills the empty gap beside the narrow section-head there); each instance only
+  // animates while its own section is on screen.
+  document.querySelectorAll('.particles-canvas').forEach(function (particlesCanvas) {
+    if (reduceMotion || !('requestAnimationFrame' in window)) return;
     var pCtx = particlesCanvas.getContext('2d');
     var pSection = particlesCanvas.closest('section');
     var particles = [];
@@ -1798,7 +2122,37 @@
     } else {
       startParticles();
     }
-  }
+  });
+
+  // Depoimentos em vídeo — facade leve: só troca a miniatura pelo iframe do YouTube
+  // quando alguém clica/ativa o card, então os três vídeos não custam nada até esse ponto.
+  document.querySelectorAll('.video-testimonial-media').forEach(function (media) {
+    var load = function () {
+      if (media.classList.contains('is-playing')) return;
+      var id = media.getAttribute('data-yt-id');
+      var label = media.getAttribute('aria-label') || 'Vídeo do YouTube';
+      var iframe = document.createElement('iframe');
+      // O YouTube recomenda sempre mandar "origin" no embed — sem ele, o player às vezes
+      // recusa validar e cai no "Erro 153". Só manda quando a página está em http(s):
+      // servida por file:// (abrindo o HTML direto), window.location.origin vem "null"
+      // ou "file://" e o YouTube nunca aceita embed nesse caso, com ou sem o parâmetro.
+      var embedSrc = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
+      if (/^https?:$/.test(window.location.protocol)) {
+        embedSrc += '&origin=' + encodeURIComponent(window.location.origin);
+      }
+      iframe.src = embedSrc;
+      iframe.title = label;
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      media.classList.add('is-playing');
+      media.innerHTML = '';
+      media.appendChild(iframe);
+    };
+    media.addEventListener('click', load);
+    media.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); }
+    });
+  });
 
   // Custom cursor — desktop pointer only, mirrors the naocodei "cursor personalizado" pattern
   if (!reduceMotion && pointerFine) {
@@ -1826,6 +2180,34 @@
       el.addEventListener('mouseenter', function () { cursorRing.classList.add('is-active'); });
       el.addEventListener('mouseleave', function () { cursorRing.classList.remove('is-active'); });
     });
+  }
+
+  // Problema — crossfade lento entre fotos reais no card da seção; pausado se a seção
+  // não está visível (economiza trabalho) e desligado por completo com reduced-motion.
+  var problemPhotoCard = document.querySelector('.problem-photo-card');
+  if (problemPhotoCard && !reduceMotion) {
+    var problemSlides = Array.prototype.slice.call(problemPhotoCard.querySelectorAll('.problem-bg-img'));
+    var problemIndex = 0;
+    var problemTimer = null;
+    var advanceProblemSlide = function () {
+      problemSlides[problemIndex].classList.remove('is-active');
+      problemSlides[problemIndex].setAttribute('aria-hidden', 'true');
+      problemIndex = (problemIndex + 1) % problemSlides.length;
+      problemSlides[problemIndex].classList.add('is-active');
+      problemSlides[problemIndex].removeAttribute('aria-hidden');
+    };
+    var startProblemSlideshow = function () { if (!problemTimer) problemTimer = window.setInterval(advanceProblemSlide, 6000); };
+    var stopProblemSlideshow = function () { if (problemTimer) { window.clearInterval(problemTimer); problemTimer = null; } };
+    if (problemSlides.length > 1) {
+      var problemSection = problemPhotoCard.closest('.problem-section');
+      if (problemSection && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) { entry.isIntersecting ? startProblemSlideshow() : stopProblemSlideshow(); });
+        }, { threshold: 0.1 }).observe(problemSection);
+      } else {
+        startProblemSlideshow();
+      }
+    }
   }
 })();
 </script>

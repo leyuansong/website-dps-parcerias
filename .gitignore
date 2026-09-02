@@ -25,3 +25,16 @@ node_modules/
 # Imagens originais/brutas — arquivo de origem, não o que o site serve.
 # Guarde uma cópia de backup fora do repositório se quiser preservá-las.
 media-fonte/
+
+# Pasta de arquivos de apoio (rascunhos de copy em .md, imagens órfãs de versões
+# antigas de seções redesenhadas etc.) — hoje ela vive fora do repositório, em
+# ../_arquivos-projeto/, exatamente pra nunca ser publicada nem commitada. Esta
+# regra é só uma segunda trava, caso alguém recrie a pasta dentro da raiz do
+# projeto por engano no futuro.
+/_arquivos-projeto/
+
+# Rascunhos de conteúdo em Markdown soltos na raiz — fonte de texto usada pra
+# montar páginas HTML (ex.: politica-de-privacidade.md, termos-e-cookies.md),
+# não o que o site publica. O README.md do projeto é a única exceção.
+/*.md
+!/README.md
